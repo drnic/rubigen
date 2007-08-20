@@ -59,11 +59,11 @@ REV = nil
 # REV = `svn info`.each {|line| if line =~ /^Revision:/ then k,v = line.split(': '); break v.chomp; else next; end} rescue nil
 VERS = Rubigen::VERSION::STRING + (REV ? ".#{REV}" : "")
 CLEAN.include ['**/.*.sw?', '*.gem', '.config', '**/.DS_Store']
-RDOC_OPTS = ['--quiet', '--title', 'rubigen documentation',
-    "--opname", "index.html",
-    "--line-numbers", 
-    "--main", "README",
-    "--inline-source"]
+# RDOC_OPTS = ['--quiet', '--title', 'rubigen documentation',
+#     "--opname", "index.html",
+#     "--line-numbers", 
+#     "--main", "README",
+#     "--inline-source"]
 
 class Hoe
   def extra_deps 
@@ -88,8 +88,6 @@ hoe = Hoe.new(GEM_NAME, VERS) do |p|
   p.changes = p.paragraphs_of("History.txt", 0..1).join("\\n\\n")
   # An array of rubygem dependencies [name, version], e.g. [ ['activesupport', '>= 1.3.1'] ]
   p.extra_deps = [['activesupport', '>= 1.3.1']]     
-  
-  #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
   
 end
 
@@ -125,7 +123,7 @@ task :deploy => [:check_version, :website, :release] do
 end
 
 desc 'Runs tasks website_generate and install_gem as a local deployment of the gem'
-task :local_deploy => [:website_generate, :install_gem_no_doc]
+task :local_deploy => [:website_generate, :install_gem]
 
 task :check_version do
   unless ENV['VERSION']

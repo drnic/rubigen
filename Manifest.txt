@@ -88,7 +88,7 @@ lib/rubigen/generators/applications/ruby_app/templates/module.rb
 lib/rubigen/generators/applications/ruby_app/templates/script/generate
 lib/rubigen/generators/applications/ruby_app/templates/test_helper.rb
 lib/rubigen/generators/components/test_unit/USAGE
-lib/rubigen/generators/components/test_unit/templates/test_unit.rb
+lib/rubigen/generators/components/test_unit/templates/test
 lib/rubigen/generators/components/test_unit/test_unit_generator.rb
 lib/rubigen/helpers/generator_test_helper.rb
 lib/rubigen/lookup.rb
