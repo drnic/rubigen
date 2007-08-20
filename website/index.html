@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+      rubigen
+  </title>
+  <script src="javascripts/rounded_corners_lite.inc.js" type="text/javascript"></script>
+<style>
+</style>
+  <script type="text/javascript">
+    window.onload = function() {
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+      var versionBox = new curvyCorners(settings, document.getElementById("version"));
+      versionBox.applyCornersToAll();
+    }
+  </script>
+</head>
+<body>
+<div id="main">
+    <h1>rubigen</h1>
+    <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/rubigen"; return false'>
+      <p>Get Version</p>
+      <a href="http://rubyforge.org/projects/rubigen" class="numbers">1.0.0</a>
+    </div>
+    <h1>&#x2192; &#8216;rubigen&#8217;
+h2. What
+h2. Installing
+<pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">rubigen</span></pre>
+h2. The basics
+h2. Demonstration of usage
+h2. Forum
+<a href="http://groups.google.com/group/rubigen">http://groups.google.com/group/rubigen</a>
+<span class="caps">TODO</span> &#8211; create Google Group &#8211; rubigen
+h2. How to submit patches
+Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a> and for section <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups">8b: Submit patch to Google Groups</a>, use the Google Group above.
+The trunk repository is <code>svn://rubyforge.org/var/svn/rubigen/trunk</code> for anonymous access.
+h2. License
+This code is free to use under the terms of the <span class="caps">MIT</span> license. 
+h2. Contact
+Comments are welcome. Send an email to <a href="mailto:drnicwilliams@gmail.com">Dr Nic Williams</a>.</h1>
+    <p class="coda">
+      <a href="drnicwilliams@gmail.com">Dr Nic Williams</a>, 17th August 2007<br>
+      Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
+    </p>
+</div>
+<!-- insert site tracking codes here, like Google Urchin -->
+</body>
+</html>

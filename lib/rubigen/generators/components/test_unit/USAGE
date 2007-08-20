@@ -1,0 +1,14 @@
+Description:
+    Stubs out a new test (using Test::Unit). Pass the model name, either 
+    CamelCased or under_scored.
+
+    This generates a unit test in /test.
+
+Examples:
+    `./script/generate test_unit account_receiver`
+
+        creates an Account test:
+            Test:       test/test_account_receiver.rb
+
+    The same result will occur for:
+      `./script/generate test_unit AccountReceiver`

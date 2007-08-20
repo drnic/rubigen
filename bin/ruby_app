@@ -1,0 +1,12 @@
+require File.dirname(__FILE__) + '/../lib/rubigen/version'
+if %w(--version -v).include? ARGV.first
+  puts "Rails #{RubiGen::VERSION::STRING}"
+  exit(0)
+end
+
+app_path = ARGV.first
+
+require File.dirname(__FILE__) + '/../lib/rubigen'
+require 'rubigen/scripts/generate'
+RubiGen::Base.use_application_sources!
+RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'ruby_app')

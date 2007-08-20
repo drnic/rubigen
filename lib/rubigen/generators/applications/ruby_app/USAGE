@@ -1,0 +1,10 @@
+Description:
+    The 'ruby_app' command creates a new Ruby application with a default
+    directory structure and configuration at the path you specify.
+
+    This is based on Jay Fields' article - 
+
+Example:
+    ruby_app ~/Code/Ruby/myapp
+
+    This generates a skeletal Ruby application installation in ~/Code/Ruby/myapp.
