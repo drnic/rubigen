@@ -28,7 +28,9 @@ require File.join(File.dirname(__FILE__), 'lib', 'rubigen', 'version')
 
 AUTHOR = 'Dr Nic Williams'  # can also be an array of Authors
 EMAIL = "drnicwilliams@gmail.com"
-DESCRIPTION = "description of gem"
+DESCRIPTION = <<-EOS
+A framework to allow Ruby applications to generate file/folder stubs (like the rails command does for Ruby on Rails, and the ‘script/generate’ command within a Rails application during development).
+EOS
 GEM_NAME = 'rubigen' # what ppl will type to install your gem
 
 @config_file = "~/.rubyforge/user-config.yml"

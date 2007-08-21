@@ -5,5 +5,5 @@ require File.join(File.dirname(__FILE__), %w[.. lib rubigen])
 require 'rubigen/scripts/destroy'
 
 ARGV.shift if ['--help', '-h'].include?(ARGV[0])
-RubiGen::Base.use_component_sources! :rubygems, :newgem
+RubiGen::Base.use_component_sources! :rubygems, :merb
 RubiGen::Scripts::Destroy.new.run(ARGV)

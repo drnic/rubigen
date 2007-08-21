@@ -15,7 +15,7 @@ class TestUnitGenerator < RubiGen::Base
       m.directory 'test'
 
       # Model class, unit test, and fixtures.
-      m.template 'test',  "test/#{test_name}.rb"
+      m.template 'test.rb',  "test/#{test_name}.rb"
     end
   end
 

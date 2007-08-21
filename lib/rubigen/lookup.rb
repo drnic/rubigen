@@ -103,7 +103,7 @@ module RubiGen
       def application_sources(filters = [])
         filters.unshift 'app'
         app_sources = []
-        app_sources << PathSource.new(:builtin, "#{File.dirname(__FILE__)}/generators/applications")
+        app_sources << PathSource.new(:builtin, File.join(File.dirname(__FILE__), %w[.. .. app_generators]))
         app_sources << filtered_sources(filters)
         app_sources.flatten
       end
@@ -129,7 +129,7 @@ module RubiGen
           new_sources << PathSource.new(:vendor, "#{::APP_ROOT}/vendor/generators")
           new_sources << PathSource.new(:plugins, "#{::APP_ROOT}/vendor/plugins/*/**/generators")
         end
-        new_sources << PathSource.new(:builtin, "#{File.dirname(__FILE__)}/generators/components")
+        new_sources << PathSource.new(:builtin, File.join(File.dirname(__FILE__), %w[.. .. generators]))
         new_sources << filtered_sources(filters)
         write_inheritable_attribute(:sources, new_sources.flatten)
       end

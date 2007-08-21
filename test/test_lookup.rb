@@ -83,7 +83,7 @@ class TestLookup < Test::Unit::TestCase
   
   def test_use_application_sources
     Base.use_application_sources!
-    expected_path = File.expand_path(File.join(File.dirname(__FILE__), %w[.. lib rubigen generators applications]))
+    expected_path = File.expand_path(File.join(File.dirname(__FILE__), %w[.. app_generators]))
     builtin_source = Base.sources.find { |s| s.path == expected_path if s.respond_to?(:path) }
     assert_not_nil(builtin_source, "Cannot find builtin generators")
     assert_nothing_raised(GeneratorError) do

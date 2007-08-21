@@ -1,3 +1,8 @@
-== =0.1.0 2007-08-17
+== 1.0.1 2007-08-20
+
+* Moved builtin generators into root folders, away from lib folder, to protected them
+  from ri/rdocs processes (which didn't like ERb <%= %> inside Ruby files)
+
+== 1.0.0 2007-08-17
 * 1 major enhancement:
   * Initial release
