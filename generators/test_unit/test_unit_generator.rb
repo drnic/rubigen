@@ -7,7 +7,7 @@ class TestUnitGenerator < RubiGen::Base
     usage if args.empty?
     @name           = args.shift
     @test_name      = "test_#{name}".underscore
-    @class_name     = test_name.camelize
+    @class_name     = name.camelize
   end
   
   def manifest

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class <%= class_name %> < Test::Unit::TestCase
+class Test<%= class_name %> < Test::Unit::TestCase
   def setup
   end
   

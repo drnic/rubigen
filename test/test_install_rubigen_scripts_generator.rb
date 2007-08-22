@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), "test_generator_helper.rb")
 
-class TestRubigenInstallScriptsGenerator < Test::Unit::TestCase
+class TestInstallRubigenScriptsGenerator < Test::Unit::TestCase
   include RubiGen::GeneratorTestHelper
 
   def setup
@@ -25,11 +25,11 @@ class TestRubigenInstallScriptsGenerator < Test::Unit::TestCase
   #   bare_setup - place this in setup method to create the APP_ROOT folder for each test
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
   
-  def test_rubigen_install_script_should_create_script_generate
-    run_generator('rubigen_install_script', [], sources)
-    assert_directory_exists("script")
-    assert_generated_file("script/generate")
-    assert_generated_file("script/destroy")
+  def test_install_rubigen_scripts_should_create_script_generate
+    run_generator('install_rubigen_scripts', [APP_ROOT] + %w(rubygems merb), sources)
+    assert_directory_exists "script"
+    assert_generated_file   "script/generate"
+    assert_generated_file   "script/destroy"
   end
   
   private

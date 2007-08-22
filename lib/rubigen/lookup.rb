@@ -196,8 +196,16 @@ module RubiGen
     end
 
     # Return a convenient sorted list of all generator names.
-    def names
-      map { |spec| spec.name }.sort
+    def names(filter = nil)
+      inject([]) do |mem, spec|
+        case filter
+        when :visible
+          mem << spec.name if spec.visible?
+        else
+          usage_message
+        end
+        mem
+      end.sort
     end
   end
 
@@ -240,7 +248,7 @@ module RubiGen
     end
 
     def ==(source)
-      self.class == source.class && path == source.path && filters == source.filters
+      self.class == source.class && path == source.path && filters == source.filters && label == source.label
     end
   end
 

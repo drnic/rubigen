@@ -1,6 +1,7 @@
-require File.dirname(__FILE__) + "/test_helper"
+require File.join(File.dirname(__FILE__), "test_generator_helper.rb")
 
 class TestGenerateBuiltinTestUnit < Test::Unit::TestCase
+  include RubiGen::GeneratorTestHelper
 
   def setup
     rubygems_setup

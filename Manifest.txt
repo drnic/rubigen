@@ -3,6 +3,7 @@ License.txt
 Manifest.txt
 README.txt
 Rakefile
+Todo.txt
 app_generators/ruby_app/USAGE
 app_generators/ruby_app/ruby_app_generator.rb
 app_generators/ruby_app/templates/README.txt
@@ -11,6 +12,7 @@ app_generators/ruby_app/templates/fresh_rakefile
 app_generators/ruby_app/templates/module.rb
 app_generators/ruby_app/templates/script/generate
 app_generators/ruby_app/templates/test_helper.rb
+bin/install_rubigen_scripts
 bin/ruby_app
 examples/rails_generators/applications/app/USAGE
 examples/rails_generators/applications/app/app_generator.rb
@@ -83,6 +85,10 @@ examples/rails_generators/components/web_service/templates/api_definition.rb
 examples/rails_generators/components/web_service/templates/controller.rb
 examples/rails_generators/components/web_service/templates/functional_test.rb
 examples/rails_generators/components/web_service/web_service_generator.rb
+generators/install_rubigen_scripts/install_rubigen_scripts_generator.rb
+generators/install_rubigen_scripts/templates/script/destroy
+generators/install_rubigen_scripts/templates/script/generate
+generators/install_rubigen_scripts/templates/script/win_script.cmd
 generators/test_unit/USAGE
 generators/test_unit/templates/test.rb
 generators/test_unit/test_unit_generator.rb
@@ -110,7 +116,9 @@ test/examples_from_rails/test_rails_resource_generator.rb
 test/examples_from_rails/test_rails_scaffold_generator.rb
 test/test_generate_builtin_application.rb
 test/test_generate_builtin_test_unit.rb
+test/test_generator_helper.rb
 test/test_helper.rb
+test/test_install_rubigen_scripts_generator.rb
 test/test_lookup.rb
 website/index.html
 website/index.txt

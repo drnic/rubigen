@@ -45,7 +45,7 @@ module RubiGen
           RubiGen::Base.sources.inject({}) do |mem, source|
             label = source.label.to_s.capitalize
             mem[label] ||= []
-            mem[label] |= source.names
+            mem[label] |= source.names(:visible)
             mem
           end.each_pair do |label, names|
             usage << "  #{label}: #{names.join(', ')}\n" unless names.empty?

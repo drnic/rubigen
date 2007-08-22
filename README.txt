@@ -20,6 +20,10 @@ If you are developing a RubyGem, then you will want a different set of generator
 
 RubiGen exists to give different development environments their own generator framework.
 
+=== Thanks go to...
+
+Jeremy Kemper wrote the original Rails Generator, which is 95% of the basis of RubiGen. He's awesome.
+
 == Installation
 
 RubiGen is only required at development time, and normally isn't required at deployment time

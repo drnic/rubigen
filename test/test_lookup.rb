@@ -1,7 +1,11 @@
-require File.dirname(__FILE__) + "/test_helper"
+require File.dirname(__FILE__) + "/test_generator_helper"
 
 class TestLookup < Test::Unit::TestCase
   include RubiGen
+  
+  def setup
+    Base.reset_sources
+  end
   
   def test_lookup_component
     assert_nothing_raised(GeneratorError, "Could not find test_unit generator") { Base.lookup('test_unit') }

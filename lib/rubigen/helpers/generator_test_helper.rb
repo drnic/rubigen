@@ -9,13 +9,7 @@ module RubiGen
 
     # Instatiates the Generator
     def build_generator(name, params, sources, options)
-      # if !options.first
-      #   type, sources = :component, []
-      # elsif options.first.is_a?(Symbol)
-      #   type, sources = options.first, []
-      # else
-      #   type, sources = :component, options.select { |s| s.is_a?(Source) }
-      # end
+      options.merge!(:collision => :force)  # so no questions are prompted
       if sources.is_a?(Symbol)
         if sources == :app
           RubiGen::Base.use_application_sources!

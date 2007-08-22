@@ -1,7 +1,18 @@
+== 1.0.2 2007-08-22
+
+* Renamed rubigen_install_script -> install_rubigen_script
+* install_rubigen_script is now a component generator so can be reused by other generators to create script/generate
+* Added "Thanks to Jeremy Kemper" into website
+* Cleaned up USAGE for test_unit
+* If a generator does not have a USAGE file, then it is invisible from lists of available generators.
+  This will be the mechanism for having hidden generators (e.g. install_rubigen_scripts)
+
 == 1.0.1 2007-08-20
 
 * Moved builtin generators into root folders, away from lib folder, to protected them
   from ri/rdocs processes (which didn't like ERb <%= %> inside Ruby files)
+* New app: rubigen_install_script
+  * adds script/generate and script/destroy to current folder
 
 == 1.0.0 2007-08-17
 * 1 major enhancement:

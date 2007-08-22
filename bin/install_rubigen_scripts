@@ -8,5 +8,5 @@ if %w(-v --version).include? ARGV.first
 end
 
 require 'rubigen/scripts/generate'
-RubiGen::Base.use_application_sources! :rubigen_install_scripts
-RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'rubigen_install_scripts')
+RubiGen::Base.use_component_sources!
+RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'install_rubigen_scripts')

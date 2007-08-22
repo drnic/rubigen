@@ -20,7 +20,6 @@ class RubyAppGenerator < RubiGen::Base
   def manifest
     # Use /usr/bin/env if no special shebang was specified
     script_options     = { :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang] }
-    dispatcher_options = { :chmod => 0755, :shebang => options[:shebang] }
     windows            = (RUBY_PLATFORM =~ /dos|win32|cygwin/i) || (RUBY_PLATFORM =~ /(:?mswin|mingw)/)
 
     record do |m|
@@ -32,22 +31,17 @@ class RubyAppGenerator < RubiGen::Base
       m.file "fresh_rakefile", "Rakefile"
       m.file "README.txt",     "README.txt"
 
-     # Scripts
-      %w( generate ).each do |file|
-        m.file     "script/#{file}",        "script/#{file}", script_options
-        m.template "script/win_script.cmd", "script/#{file}.cmd", 
-          :assigns => { :filename => file } if windows
-      end
-      
       # Default module for app
-      m.template "module.rb",         "lib/#{app_name}.rb", script_options
+      m.template "module.rb",         "lib/#{app_name}.rb"
       
       # Test helper
-      m.template "test_helper.rb",    "test/test_helper.rb", script_options
+      m.template "test_helper.rb",    "test/test_helper.rb"
 
       %w(debug).each { |file|
         m.file "configs/empty.log", "log/#{file}.log", :chmod => 0666
       }
+      
+      m.dependency "install_rubigen_scripts", [destination_root, "rubygems"], :shebang => options[:shebang]
     end
   end
 
@@ -56,12 +50,12 @@ class RubyAppGenerator < RubiGen::Base
       "Usage: #{$0} /path/to/your/app [options]"
     end
 
-    def add_options!(opt)
-      opt.separator ''
-      opt.separator 'Options:'
-      opt.on("-r", "--ruby=path", String,
+    def add_options!(opts)
+      opts.separator ''
+      opts.separator 'Options:'
+      opts.on("-r", "--ruby=path", String,
              "Path to the Ruby binary of your choice (otherwise scripts use env, dispatchers current path).",
-             "Default: #{DEFAULT_SHEBANG}") { |v| options[:shebang] = v }
+             "Default: #{DEFAULT_SHEBANG}") { |options[:shebang]| }
     end
     
 

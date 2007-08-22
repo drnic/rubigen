@@ -27,6 +27,14 @@ module RubiGen
     def class_name
       "#{name.camelize}Generator"
     end
+    
+    def usage_file
+      "#{path}/USAGE"
+    end
+    
+    def visible?
+      File.exists? usage_file
+    end
 
     private
       # Search for the first Class descending from RubiGen::Base
