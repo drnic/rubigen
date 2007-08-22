@@ -255,6 +255,15 @@ module RubiGen
         end
       end
       
+      def folder(template_path, path=nil, options = {})
+        template_path = "/" if template_path.blank?
+        source = source_path(template_path)
+        files  = Dir[source + '/*'].select { |file| File.file? file }.map { |file| file.sub(/^#{source}/,"") }
+        files.each do |file_name|
+          file "#{template_path}#{file_name}", "#{path}#{file_name}", options
+        end
+      end
+      
       # Checks if the source and the destination file are identical. If
       # passed a block then the source file is a template that needs to first
       # be evaluated before being compared to the destination.

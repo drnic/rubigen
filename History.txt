@@ -1,3 +1,8 @@
+== TRUNK 2007-08-22
+
+* New manifest actions:
+  * m.folder - copies over all files in folder into target path
+
 == 1.0.3 2007-08-22
 
 * /generators folder is automatically picked up by all component/app generators [bug fix]

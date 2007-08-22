@@ -28,14 +28,15 @@ class RubyAppGenerator < RubiGen::Base
       BASEDIRS.each { |path| m.directory path }
 
       # Root
-      m.file "fresh_rakefile", "Rakefile"
-      m.file "README.txt",     "README.txt"
+      # m.file "fresh_rakefile", "Rakefile"
+      # m.file "README.txt",     "README.txt"
+      m.folder ""
 
       # Default module for app
-      m.template "module.rb",         "lib/#{app_name}.rb"
+      m.template "lib/module.rb",         "lib/#{app_name}.rb"
       
       # Test helper
-      m.template "test_helper.rb",    "test/test_helper.rb"
+      m.template_copy_each %w(test_helper.rb),    "test"
 
       %w(debug).each { |file|
         m.file "configs/empty.log", "log/#{file}.log", :chmod => 0666
