@@ -87,7 +87,7 @@ hoe = Hoe.new(GEM_NAME, VERS) do |p|
   p.clean_globs |= CLEAN  #An array of file patterns to delete on clean.
   
   # == Optional
-  p.changes = p.paragraphs_of("History.txt", 0..1).join("\\n\\n")
+  p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   # An array of rubygem dependencies [name, version], e.g. [ ['activesupport', '>= 1.3.1'] ]
   p.extra_deps = [['activesupport', '>= 1.3.1']]     
   
