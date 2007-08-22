@@ -1,3 +1,7 @@
+== 1.0.3 2007-08-22
+
+* /generators folder is automatically picked up by all component/app generators [bug fix]
+
 == 1.0.2 2007-08-22
 
 * Renamed rubigen_install_script -> install_rubigen_script

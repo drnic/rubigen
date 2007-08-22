@@ -245,7 +245,7 @@ The trunk repository is <code>svn://rubyforge.org/var/svn/rubigen/trunk</code> f
 
 h2. Thanks go to...
 
-Jeremy Kemper (bitsweat) who wrote the original "Rails Generator":http://dev.rubyonrails.org.
+"Jeremy Kemper":http://bitsweat.net/ (bitsweat) who wrote the original "Rails Generator":http://dev.rubyonrails.org.
 
 h2. License
 

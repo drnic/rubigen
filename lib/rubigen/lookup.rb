@@ -244,6 +244,7 @@ module RubiGen
       @filters = filters.first.is_a?(Array) ? filters.first : filters
       return "" if @filters.blank?
       filter_str = @filters.map {|filter| "#{filter}_"}.join(",")
+      filter_str += ","
       "{#{filter_str}}"
     end
 
@@ -298,6 +299,7 @@ module RubiGen
         @filters = filters.first.is_a?(Array) ? filters.first : filters
         return "" if filters.blank?
         filter_str = filters.map {|filter| "#{filter}_"}.join(",")
+        filter_str += ","
         "{#{filter_str}}"
       end
   end
