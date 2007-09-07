@@ -1,7 +1,9 @@
-== TRUNK 2007-08-22
+== 1.0.4 2007-09-07
 
 * New manifest actions:
   * m.folder - copies over all files in folder into target path
+* helper run_generator returns generator instance (so you can assert instance variables/methods etc)
+* base_name method for generators - returns basename of destination_root, unless its trunk/tags/branches
 
 == 1.0.3 2007-08-22
 

@@ -2,9 +2,11 @@ module RubiGen
   module GeneratorTestHelper
     # Runs the create command (like the command line does)
     def run_generator(name, params, sources, options = {})
+      generator = build_generator(name, params, sources, options)
       silence_generator do
-        build_generator(name, params, sources, options).command(:create).invoke!
+        generator.command(:create).invoke!
       end
+      generator
     end
 
     # Instatiates the Generator

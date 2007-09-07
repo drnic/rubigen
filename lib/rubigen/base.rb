@@ -147,6 +147,20 @@ module RubiGen
     def destination_path(relative_destination)
       File.join(destination_root, relative_destination)
     end
+    
+    # Return the basename of the destination_root, 
+    # BUT, if it is trunk, tags, or branches, it continues to the
+    # parent path for the name
+    def base_name
+      name = File.basename(destination_root)
+      root = destination_root
+      while %w[trunk branches tags].include? name
+        root = File.expand_path(File.join(root, ".."))
+        name = File.basename(root)
+      end
+      name
+    end
+    
 
     protected
       # Convenience method for generator subclasses to record a manifest.
