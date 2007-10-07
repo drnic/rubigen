@@ -1,3 +1,7 @@
+== TRUNK 2007-10-08
+
+* Added Jeremy Kemper to license/copyright/gem author list.
+
 == 1.0.4 2007-09-07
 
 * New manifest actions:

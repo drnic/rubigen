@@ -26,7 +26,7 @@ end
 include FileUtils
 require File.join(File.dirname(__FILE__), 'lib', 'rubigen', 'version')
 
-AUTHOR = 'Dr Nic Williams'  # can also be an array of Authors
+AUTHOR = ['Dr Nic Williams', 'Jeremy Kemper']  # can also be an array of Authors
 EMAIL = "drnicwilliams@gmail.com"
 DESCRIPTION = <<-EOS
 A framework to allow Ruby applications to generate file/folder stubs (like the rails command does for Ruby on Rails, and the ‘script/generate’ command within a Rails application during development).
