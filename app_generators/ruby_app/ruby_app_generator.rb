@@ -36,7 +36,7 @@ class RubyAppGenerator < RubiGen::Base
       m.template "lib/module.rb",         "lib/#{app_name}.rb"
       
       # Test helper
-      m.template_copy_each %w(test_helper.rb),    "test"
+      m.template_copy_each %w(test_helper.rb.erb),    "test"
 
       %w(debug).each { |file|
         m.file "configs/empty.log", "log/#{file}.log", :chmod => 0666

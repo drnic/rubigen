@@ -1,3 +1,7 @@
+== 1.0.6 2007-10-18
+
+* Templates can end with .erb (e.g. model.rb.erb) and template_copy_each will remove the .erb extension (create model.rb)
+
 == 1.0.5 2007-10-08
 
 * Added Jeremy Kemper to license/copyright/gem author list.

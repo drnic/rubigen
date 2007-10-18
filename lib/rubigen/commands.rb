@@ -303,7 +303,7 @@ module RubiGen
       def template_copy_each(files, path = nil, options = {})
         path = path ? "#{path}/" : ""
         files.each do |file_name|
-          template "#{path}#{file_name}", "#{path}#{file_name}", options
+          template "#{path}#{file_name}", "#{path}#{file_name.gsub(/\.erb$/,'')}", options
         end
       end
 
