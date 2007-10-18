@@ -10,7 +10,7 @@ app_generators/ruby_app/templates/README.txt
 app_generators/ruby_app/templates/Rakefile
 app_generators/ruby_app/templates/configs/empty.log
 app_generators/ruby_app/templates/lib/module.rb
-app_generators/ruby_app/templates/test/test_helper.rb
+app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
 bin/ruby_app
 examples/rails_generators/applications/app/USAGE
