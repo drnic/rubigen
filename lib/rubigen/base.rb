@@ -23,7 +23,7 @@ require File.dirname(__FILE__) + '/generated_attribute'
 # The layout of generator files can be seen in the built-in 
 # +test_unit+ generator:
 #   
-#   generators/
+#   test_unit_generators/
 #     test_unit/
 #       test_unit_generator.rb
 #       templates/

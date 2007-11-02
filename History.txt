@@ -1,3 +1,7 @@
+== 1.0.7 2007-11-02
+
+* Moved test_unit generator to test_unit scope (instead of global scope)
+
 == 1.0.6 2007-10-18
 
 * Templates can end with .erb (e.g. model.rb.erb) and template_copy_each will remove the .erb extension (create model.rb)

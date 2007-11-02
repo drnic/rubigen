@@ -13,6 +13,8 @@ app_generators/ruby_app/templates/lib/module.rb
 app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
 bin/ruby_app
+config/hoe.rb
+config/requirements.rb
 examples/rails_generators/applications/app/USAGE
 examples/rails_generators/applications/app/app_generator.rb
 examples/rails_generators/components/controller/USAGE
@@ -88,9 +90,6 @@ generators/install_rubigen_scripts/install_rubigen_scripts_generator.rb
 generators/install_rubigen_scripts/templates/script/destroy
 generators/install_rubigen_scripts/templates/script/generate
 generators/install_rubigen_scripts/templates/script/win_script.cmd
-generators/test_unit/USAGE
-generators/test_unit/templates/test.rb
-generators/test_unit/test_unit_generator.rb
 lib/rubigen.rb
 lib/rubigen/base.rb
 lib/rubigen/commands.rb
@@ -106,10 +105,14 @@ lib/rubigen/scripts/update.rb
 lib/rubigen/simple_logger.rb
 lib/rubigen/spec.rb
 lib/rubigen/version.rb
+log/debug.log
 script/destroy
 script/generate
 script/txt2html
 setup.rb
+tasks/deployment.rake
+tasks/environment.rake
+tasks/website.rake
 test/examples_from_rails/generator_test_helper.rb
 test/examples_from_rails/test_rails_resource_generator.rb
 test/examples_from_rails/test_rails_scaffold_generator.rb
@@ -119,6 +122,10 @@ test/test_generator_helper.rb
 test/test_helper.rb
 test/test_install_rubigen_scripts_generator.rb
 test/test_lookup.rb
+test/test_rubigen.rb
+test_unit_generators/test_unit/USAGE
+test_unit_generators/test_unit/templates/test.rb
+test_unit_generators/test_unit/test_unit_generator.rb
 website/index.html
 website/index.txt
 website/javascripts/rounded_corners_lite.inc.js

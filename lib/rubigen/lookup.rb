@@ -113,8 +113,8 @@ module RubiGen
       #     generating in the context of this application, so search
       #     APP_ROOT/generators.
       # 2.  User home directory.  Search ~/.rubigen/generators.
-      # 3.  RubyGems.  Search for gems containing /generators folder.
-      # 4.  Builtins.  test_unit.
+      # 3.  RubyGems.  Search for gems containing /{scope}_generators folder.
+      # 4.  Builtins.  None currently.
       #
       # Search can be filtered by passing one or more prefixes.
       # e.g. use_component_sources!(:rubygems) means it will also search in the following 
@@ -129,7 +129,6 @@ module RubiGen
           new_sources << PathSource.new(:vendor, "#{::APP_ROOT}/vendor/generators")
           new_sources << PathSource.new(:plugins, "#{::APP_ROOT}/vendor/plugins/*/**/generators")
         end
-        new_sources << PathSource.new(:builtin, File.join(File.dirname(__FILE__), %w[.. .. generators]))
         new_sources << filtered_sources(filters)
         write_inheritable_attribute(:sources, new_sources.flatten)
       end

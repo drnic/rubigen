@@ -20,9 +20,8 @@ module RubiGen
         end
       else
         RubiGen::Base.reset_sources
-        RubiGen::Base.append_sources(*sources) unless sources.blank?
+        RubiGen::Base.prepend_sources(*sources) unless sources.blank?
       end
-      # generator_options = options.find { |o| o.is_a?(Hash) } || {}
       RubiGen::Base.instance(name, params, options)
     end
 
