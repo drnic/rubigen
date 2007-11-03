@@ -39,7 +39,7 @@ class RubyAppGenerator < RubiGen::Base
       m.template_copy_each %w(test_helper.rb.erb),    "test"
 
       %w(debug).each { |file|
-        m.file "configs/empty.log", "log/#{file}.log", :chmod => 0666
+        m.file "configs/empty_log", "log/#{file}.log", :chmod => 0666
       }
       
       m.dependency "install_rubigen_scripts", [destination_root, "rubygems"], :shebang => options[:shebang]
