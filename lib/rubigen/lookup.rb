@@ -291,7 +291,7 @@ module RubiGen
               mem << generator
             end
             mem
-          end
+          end.reverse
       end
       
       def filter_str

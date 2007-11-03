@@ -1,3 +1,7 @@
+== 1.0.8 2007-11-03
+
+* generator_full_paths now returns the sources in reverse order [thx hassox]
+
 == 1.0.7 2007-11-02
 
 * Moved test_unit generator to test_unit scope (instead of global scope)
