@@ -1,11 +1,9 @@
-== 1.0.9 2007-11-03
+== 1.0.8 2007-11-03
 
+* install_rubigen_scripts adds 'test_unit' to scopes unless a test-related scope is added
 * remove examples directory because it's redundant.  See rails gem. [Winston Tsang]
 * Add missing template empty_log. [Winston Tsang]
 * Moved test_unit generator to test_unit scope (instead of global scope)
-
-== 1.0.8 2007-11-03
-
 * generator_full_paths now returns the sources in reverse order [thx hassox]
 
 == 1.0.7 2007-11-02

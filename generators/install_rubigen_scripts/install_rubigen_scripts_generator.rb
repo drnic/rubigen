@@ -12,6 +12,7 @@ class InstallRubigenScriptsGenerator < RubiGen::Base
     @path             = args.shift
     @destination_root = File.expand_path(path)
     @scopes           = args.map { |scope| scope.to_sym }
+    default_scopes
     extract_options
   end
 
@@ -60,6 +61,12 @@ EOS
       # Templates can access these value via the attr_reader-generated methods, but not the
       # raw instance variable value.
       # @author = options[:author]
+    end
+    
+    def default_scopes
+      if (scopes & %w[test_unit rspec test_spec mini_spec]).blank?
+        scopes << 'test_unit'
+      end
     end
 
 end
