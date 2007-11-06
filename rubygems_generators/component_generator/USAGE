@@ -1,0 +1,27 @@
+How to create a Generator (aka Component Generator)
+======================================
+
+1. Run this generator: script/generate component_generator mygen scope
+   Where "mygen" is the name of the generator, and scope is scope restriction.
+   A scope of "rubygems" means this generator will only be available to RubyGems developers. 
+   A scope of "merb" means the generator is only accessible to Merb applications (v0.4+).
+   If you use "rails", then your generator is only accessible by Rails applications (v2.0+).
+2. Using the generated test class, assert what directories, files, classes etc should
+   be generated.
+3. Add these files into the scope_genearators/mygen/templates folder. Your files can use
+   ERb (that is, <%= ... %>), and are called 'templates'.
+4. Specify the files in /templates are copied/templated at generation time within rubygems_genearators/mygen/mygen_generators.rb's #manifest method.
+   Use m.file for files to copy over.
+   Use m.template for files containing ERb. Create attr_reader accessors for any variables your
+   templates need access to.
+5. Run unit tests.
+6. Add usage information in the USAGE file.
+7. Update your Manifest.txt with the new files  (if you are using Hoe)
+8. Build and install your RubyGem locally. Run: rake install_gem
+9. Go to a work area for your scope (e.g. go to the root folder of a Merb application 
+   to use a "merb" scoped generator)
+10. Run "script/generate" and your generator should appear in the list of available generators.
+11. Run "script/generate mygen" to see the options and usage information for your generator.
+12. Run "script/generator mygen arguments" to execute the generator.
+
+You will see this message again when you run the generator and by using the -h/--help option.

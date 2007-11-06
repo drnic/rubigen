@@ -1,3 +1,10 @@
+== 1.1.0 2007-11-05
+
+* Promoted 'application_generator' and 'component_generator' to Rubigen
+from NewGem project (they are available even if newgem not installed)
+* install_rubigen_scripts default test fixed by mapping scopes to strings
+* version.js uploaded to website
+
 == 1.0.8 2007-11-03
 
 * install_rubigen_scripts adds 'test_unit' to scopes unless a test-related scope is added

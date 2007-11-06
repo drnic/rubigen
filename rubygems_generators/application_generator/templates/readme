@@ -1,0 +1,29 @@
+How to create a Generator (Application Generator)
+======================================
+
+1. DONE - Run the generator: script/generate application_generator myapp
+2. Using the generated test class, assert what directories, files, classes etc should
+   be generated.
+3. Add these files into the app_genearators/myapp/templates folder. Your files can use
+   ERb (that is, <%= ... %>).
+4. Specify who the files in /templates are copied/templated at generation time within
+   app_genearators/myapp/myapp_generators.rb's #manifest method.
+   Use m.file for files to copy over.
+   Use m.template for files containing ERb. Create attr_reader accessors for any variables 
+   your templates need access to.
+5. Run unit tests.
+6. If your application generator uses other generators (called 'dependencies')
+    e.g. (m.dependency "generator-from-rubygems", [arg1, arg2], options)
+   then you must add this generators' scope into the executable bin/myapp.
+   For example, if you wanted to use a rubygems and/or merb generator, then 
+   replace the use_application_sources! call in bin/myapp:
+
+      RubiGen::Base.use_application_sources! :rubygems, :merb
+
+   Without this, RubiGen will not be able to find your dependent generators.
+7. Update your Manifest.txt with the new files (rake manifest:refresh)
+8. Build and install your RubyGem locally. Run: rake install_gem
+9. Go to a directory where you can create new test apps.
+10. Run 'myapp [path]' and your application skeleton will be created.
+
+See this message again using the -h/--help option.

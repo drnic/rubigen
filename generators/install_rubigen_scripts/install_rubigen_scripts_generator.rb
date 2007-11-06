@@ -64,8 +64,8 @@ EOS
     end
     
     def default_scopes
-      if (scopes & %w[test_unit rspec test_spec mini_spec]).blank?
-        scopes << 'test_unit'
+      if (scopes.map { |s| s.to_s } & %w[test_unit rspec test_spec mini_spec]).blank?
+        scopes << :test_unit
       end
     end
 
