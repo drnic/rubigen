@@ -3,9 +3,7 @@ require File.dirname(__FILE__) + '/../lib/rubigen'
 require 'rubigen/helpers/generator_test_helper'
 include RubiGen
 
-begin
-  gem 'mocha'
-rescue LoadError
+def load_mocha
   require 'rubygems'
   begin
     gem 'mocha'
@@ -18,5 +16,12 @@ This RubyGem is required to run the tests.
 Install: gem install mocha    
 EOS
   end
+  require 'mocha'
 end
-require 'mocha'
+begin
+  gem 'mocha'
+rescue LoadError
+  load_mocha
+rescue NoMethodError
+  load_mocha
+end

@@ -1,3 +1,8 @@
+== 1.1.1 2007-11-08
+
+* active_support is now a dependency of this gem on install (it was being used
+  but wasn't a dependency)
+
 == 1.1.0 2007-11-05
 
 * Promoted 'application_generator' and 'component_generator' to Rubigen
