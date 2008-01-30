@@ -1,3 +1,9 @@
+* application_generator's bin now looks for generator within local source, not
+  within an install gem - so the bin/foo can be run in development without
+  requiring installation.
+* New collision option *i* - ignore all collisions; works like *a* which forces 
+  all collisions to overwrite existing files; i skips all collisions.
+
 == 1.1.1 2007-11-08
 
 * active_support is now a dependency of this gem on install (it was being used

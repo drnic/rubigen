@@ -8,5 +8,8 @@ if %w(-v --version).include? ARGV.first
 end
 
 require 'rubigen/scripts/generate'
-RubiGen::Base.use_application_sources! <%= name.to_sym.inspect %>
+source = RubiGen::PathSource.new(:application, 
+  File.join(File.dirname(__FILE__), "../app_generators"))
+RubiGen::Base.reset_sources
+RubiGen::Base.append_sources source
 RubiGen::Scripts::Generate.new.run(ARGV, :generator => '<%= name %>')

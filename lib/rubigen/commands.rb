@@ -92,7 +92,7 @@ module RubiGen
       private
         # Ask the user interactively whether to force collision.
         def force_file_collision?(destination, src, dst, file_options = {}, &block)
-          $stdout.print "overwrite #{destination}? [Ynaqd] "
+          $stdout.print "overwrite #{destination}? [Ynaiqd] "
           case $stdin.gets
             when /d/i
               Tempfile.open(File.basename(destination), File.dirname(dst)) do |temp|
@@ -105,11 +105,15 @@ module RubiGen
             when /a/i
               $stdout.puts "forcing #{spec.name}"
               options[:collision] = :force
+            when /i/i
+              $stdout.puts "ignoring #{spec.name}"
+              options[:collision] = :skip
             when /q/i
               $stdout.puts "aborting #{spec.name}"
               raise SystemExit
             when /n/i then :skip
-            else :force
+            when /y/i then :force
+            else force_file_collision?(destination, src, dst, file_options, &block)
           end
         rescue
           retry
