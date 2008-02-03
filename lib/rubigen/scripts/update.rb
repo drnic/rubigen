@@ -6,7 +6,7 @@ module RubiGen::Scripts
 
     protected
       def banner
-        "Usage: #{$0} [options] scaffold"
+        "Usage: #{$0} [options] generator"
       end
   end
 end
