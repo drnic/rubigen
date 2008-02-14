@@ -1,3 +1,5 @@
+* Fixed rake post_news/email output bug ("\\n\\n")
+  
 == 1.2.0 2008-02-14
 
 * application_generator's bin now looks for generator within local source, not
