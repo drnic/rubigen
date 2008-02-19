@@ -27,7 +27,7 @@ class <%= class_name %> < RubiGen::Base
       <<-EOS
 Creates a ...
 
-USAGE: #{$0} #{spec.name} name"
+USAGE: #{$0} #{spec.name} name
 EOS
     end
 
