@@ -1,4 +1,7 @@
+== 1.2.1 2008-02-19 NOT RELEASED YET
+
 * Fixed rake post_news/email output bug ("\\n\\n")
+* removed bad \" from generator banner strings
   
 == 1.2.0 2008-02-14
 
