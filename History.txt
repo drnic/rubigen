@@ -1,3 +1,7 @@
+== 1.2.2 2008-02-20
+
+* Removing one File.expand_path
+
 == 1.2.1 2008-02-19
 
 * Fixed rake post_news/email output bug ("\\n\\n")

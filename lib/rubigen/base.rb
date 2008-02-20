@@ -103,7 +103,6 @@ module RubiGen
       elsif defined? ::APP_ROOT
         @destination_root = ::APP_ROOT
       end
-      @destination_root = File.expand_path(@destination_root)
 
       # Silence the logger if requested.
       logger.quiet = options[:quiet]
