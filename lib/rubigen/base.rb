@@ -103,6 +103,7 @@ module RubiGen
       elsif defined? ::APP_ROOT
         @destination_root = ::APP_ROOT
       end
+      @destination_root = File.expand_path(@destination_root)
 
       # Silence the logger if requested.
       logger.quiet = options[:quiet]
@@ -145,7 +146,7 @@ module RubiGen
     # Example for destination_root = '/dest':
     #   destination_path('some/path.rb') == '/dest/some/path.rb'
     def destination_path(relative_destination)
-      File.join(destination_root, relative_destination)
+      File.expand_path(File.join(destination_root, relative_destination))
     end
     
     # Return the basename of the destination_root, 

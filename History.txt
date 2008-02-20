@@ -1,7 +1,10 @@
-== 1.2.1 2008-02-19 NOT RELEASED YET
+== 1.2.1 2008-02-19
 
 * Fixed rake post_news/email output bug ("\\n\\n")
 * removed bad \" from generator banner strings
+* destination_path/root have File.expand_path applied to them to ensure
+  base_name gives useful term
+* generate/destroy set APP_ROOT with expand_path too
   
 == 1.2.0 2008-02-14
 
