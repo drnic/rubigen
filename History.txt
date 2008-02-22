@@ -1,3 +1,7 @@
+== 1.2.3 2008-02-22
+
+* Remove -wKU flags from install_rubigen_scripts + ruby_app apps
+
 == 1.2.2 2008-02-20
 
 * Removing one File.expand_path
