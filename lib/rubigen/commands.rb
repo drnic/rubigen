@@ -93,6 +93,7 @@ module RubiGen
         # Ask the user interactively whether to force collision.
         def force_file_collision?(destination, src, dst, file_options = {}, &block)
           $stdout.print "overwrite #{destination}? [Ynaiqd] "
+          $stdout.flush
           case $stdin.gets
             when /d/i
               Tempfile.open(File.basename(destination), File.dirname(dst)) do |temp|
