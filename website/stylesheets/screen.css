@@ -1,13 +1,13 @@
 body {
-  background-color: #E1D1F1;
+  background-color: #F10B00;
   font-family: "Georgia", sans-serif;
   font-size: 16px;
   line-height: 1.6em;
   padding: 1.6em 0 0 0;
-  color: #333;
+  color: #FFF;
 }
 h1, h2, h3, h4, h5, h6 {
-  color: #444;
+  color: #FFF;
 }
 h1 { 
   font-family: sans-serif;
@@ -101,12 +101,12 @@ pre, code {
   text-align: right;
   font-family: sans-serif;
   font-weight: normal;
-  background-color: #B3ABFF;
-  color: #141331;
+  background-color: #468EFF;
+  color: #EEE;
   padding: 15px 20px 10px 20px;
   margin: 0 auto;
 	margin-top: 15px;
-  border: 3px solid #141331;
+  border: 3px solid #DDD;
 }
 
 #version .numbers {
@@ -119,16 +119,16 @@ pre, code {
 
 #version p {
   text-decoration: none;
-	color: #141331;
-	background-color: #B3ABFF;
+	color: #EEE;
+	background-color: #468EFF;
 	margin: 0;
 	padding: 0;
 }
 
 #version a {
   text-decoration: none;
-	color: #141331;
-	background-color: #B3ABFF;
+	color: #EEE;
+	background-color: #468EFF;
 }
 
 .clickable {
