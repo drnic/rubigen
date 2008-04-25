@@ -1,9 +1,9 @@
 class ApplicationGeneratorGenerator < RubiGen::Base
 
-  default_options 
-  
+  default_options
+
   attr_reader :name, :class_name, :app_model_name, :generator_path, :scopes, :scope_str
-  
+
   def initialize(runtime_args, runtime_options = {})
     super
     usage if args.empty?
@@ -48,7 +48,7 @@ that are useful to developers.
 USAGE: #{$0} #{spec.name} name
 EOS
     end
-    
+
     def add_options!(opts)
       # opts.separator ''
       # opts.separator 'Options:'
@@ -56,7 +56,7 @@ EOS
       #         "Generated app file will include your name.",
       #         "Default: none") { |options[:author]| }
     end
-    
+
     def extract_options
     end
 

@@ -8,7 +8,6 @@ app_generators/ruby_app/USAGE
 app_generators/ruby_app/ruby_app_generator.rb
 app_generators/ruby_app/templates/README.txt
 app_generators/ruby_app/templates/Rakefile
-app_generators/ruby_app/templates/configs/empty_log
 app_generators/ruby_app/templates/lib/module.rb
 app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
@@ -34,7 +33,6 @@ lib/rubigen/scripts/update.rb
 lib/rubigen/simple_logger.rb
 lib/rubigen/spec.rb
 lib/rubigen/version.rb
-log/debug.log
 rubygems_generators/application_generator/USAGE
 rubygems_generators/application_generator/application_generator_generator.rb
 rubygems_generators/application_generator/templates/bin
