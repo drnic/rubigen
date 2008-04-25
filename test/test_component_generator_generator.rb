@@ -6,11 +6,11 @@ class TestGenerateComponentGenerator < Test::Unit::TestCase
   def setup
     bare_setup
   end
-  
+
   def teardown
     bare_teardown
   end
-  
+
   def test_generator_without_options
     name = "genname"
     run_generator('component_generator', [name], sources)
@@ -22,6 +22,10 @@ class TestGenerateComponentGenerator < Test::Unit::TestCase
     assert_generated_class("generators/#{name}/#{name}_generator") do |body|
       # assert_has_method body, "initialize" # as_has_m cannot pickup initialize(...) only initialize
       assert_has_method body, "manifest"
+
+      gen_class, superclass = body.match(%r{class ([\w:_]+) < ([\w:_]+)})[1..2]
+      assert_equal("GennameGenerator", gen_class)
+      assert_equal("RubiGen::Base", superclass)
     end
     assert_generated_class("test/test_#{name}_generator") do |body|
       assert_has_method body, "setup"
@@ -36,7 +40,7 @@ class TestGenerateComponentGenerator < Test::Unit::TestCase
     name = "genname"
     gen_type = "fooapp"
     run_generator('component_generator', [name, gen_type], sources)
-    
+
     assert_generated_file   "#{gen_type}_generators/#{name}/#{name}_generator.rb"
     assert_generated_file   "#{gen_type}_generators/#{name}/USAGE"
     assert_generated_file   "test/test_#{name}_generator.rb"
@@ -45,6 +49,61 @@ class TestGenerateComponentGenerator < Test::Unit::TestCase
     assert_generated_class  "#{gen_type}_generators/#{name}/#{name}_generator" do |body|
       # assert_has_method body, "initialize" # as_has_m cannot pickup initialize(...) only initialize
       assert_has_method body, "manifest"
+      gen_class, superclass = body.match(%r{class ([\w:_]+) < ([\w:_]+)})[1..2]
+      assert_equal("GennameGenerator", gen_class)
+      assert_equal("RubiGen::Base", superclass)
+    end
+    assert_generated_class "test/test_#{name}_generator" do |body|
+      assert_has_method body, "setup"
+      assert_has_method body, "teardown"
+      assert_has_method body, "test_generator_without_options"
+      assert_has_method body, "sources"
+      assert_has_method body, "generator_path"
+    end
+  end
+
+  def test_generator_with_rails_generator_type
+    name = "genname"
+    gen_type = "rails"
+    run_generator('component_generator', [name, gen_type], sources)
+
+    assert_generated_file   "#{gen_type}_generators/#{name}/#{name}_generator.rb"
+    assert_generated_file   "#{gen_type}_generators/#{name}/USAGE"
+    assert_generated_file   "test/test_#{name}_generator.rb"
+    assert_generated_file   "test/test_generator_helper.rb"
+    assert_directory_exists "#{gen_type}_generators/#{name}/templates"
+    assert_generated_class  "#{gen_type}_generators/#{name}/#{name}_generator" do |body|
+      # assert_has_method body, "initialize" # as_has_m cannot pickup initialize(...) only initialize
+      assert_has_method body, "manifest"
+      gen_class, superclass = body.match(%r{class ([\w:_]+) < ([\w:_]+)})[1..2]
+      assert_equal("GennameGenerator", gen_class)
+      assert_equal("Rails::Generator::NamedBase", superclass)
+    end
+    assert_generated_class "test/test_#{name}_generator" do |body|
+      assert_has_method body, "setup"
+      assert_has_method body, "teardown"
+      assert_has_method body, "test_generator_without_options"
+      assert_has_method body, "sources"
+      assert_has_method body, "generator_path"
+    end
+  end
+
+  def test_generator_with_merb_generator_type
+    name = "genname"
+    gen_type = "merb"
+    run_generator('component_generator', [name, gen_type], sources)
+
+    assert_generated_file   "#{gen_type}_generators/#{name}/#{name}_generator.rb"
+    assert_generated_file   "#{gen_type}_generators/#{name}/USAGE"
+    assert_generated_file   "test/test_#{name}_generator.rb"
+    assert_generated_file   "test/test_generator_helper.rb"
+    assert_directory_exists "#{gen_type}_generators/#{name}/templates"
+    assert_generated_class  "#{gen_type}_generators/#{name}/#{name}_generator" do |body|
+      # assert_has_method body, "initialize" # as_has_m cannot pickup initialize(...) only initialize
+      assert_has_method body, "manifest"
+      gen_class, superclass = body.match(%r{class ([\w:_]+) < ([\w:_]+)})[1..2]
+      assert_equal("GennameGenerator", gen_class)
+      assert_equal("Merb::GeneratorBase", superclass)
     end
     assert_generated_class "test/test_#{name}_generator" do |body|
       assert_has_method body, "setup"
@@ -60,7 +119,7 @@ class TestGenerateComponentGenerator < Test::Unit::TestCase
     [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__),"../#{generator_path}"))
     ]
   end
-  
+
   def generator_path
     "rubygems_generators"
   end

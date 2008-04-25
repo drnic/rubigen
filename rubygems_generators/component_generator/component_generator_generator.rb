@@ -1,9 +1,10 @@
 class ComponentGeneratorGenerator < RubiGen::Base
-  
-  default_options 
-  
-  attr_reader :name, :class_name, :generator_type, :generator_path
-  
+
+  default_options
+
+  attr_reader :name, :class_name
+  attr_reader :generator_type, :generator_path
+
   def initialize(runtime_args, runtime_options = {})
     super
     usage if args.empty?
@@ -30,6 +31,17 @@ class ComponentGeneratorGenerator < RubiGen::Base
     end
   end
 
+  def superclass_name
+    case (generator_type.to_sym rescue nil)
+    when :rails
+      "Rails::Generator::NamedBase"
+    when :merb
+      "Merb::GeneratorBase"
+    else
+      "RubiGen::Base"
+    end
+  end
+
   protected
     def banner
       <<-EOS
@@ -46,7 +58,7 @@ EOS
       #         "Generated app file will include your name.",
       #         "Default: none") { |options[:author]| }
     end
-    
+
     def extract_options
     end
 end

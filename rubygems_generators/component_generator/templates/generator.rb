@@ -1,4 +1,4 @@
-class <%= class_name %> < RubiGen::Base
+class <%= class_name %> < <%= superclass_name %>
   
   default_options :author => nil
   
