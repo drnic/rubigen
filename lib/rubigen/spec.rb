@@ -27,11 +27,11 @@ module RubiGen
     def class_name
       "#{name.camelize}Generator"
     end
-    
+
     def usage_file
       "#{path}/USAGE"
     end
-    
+
     def visible?
       File.exists? usage_file
     end
@@ -41,10 +41,30 @@ module RubiGen
       # whose name matches the requested class name.
       def lookup_class
         ObjectSpace.each_object(Class) do |obj|
-          return obj if obj.ancestors.include?(RubiGen::Base) and
+          return obj if valid_superclass?(obj) and
                         obj.name.split('::').last == class_name
         end
         raise NameError, "Missing #{class_name} class in #{class_file}"
+      end
+
+      def valid_superclass?(obj)
+        valid_generator_superclasses.each do |klass|
+          return true if obj.ancestors.include?(klass)
+        end
+        false
+      end
+
+      def valid_generator_superclasses
+        @valid_generator_superclasses ||= [
+          "RubiGen::Base",
+          "Rails::Generator::Base"
+        ].inject([]) do |list, class_name|
+          klass = class_name.split("::").inject(Object) do |klass, name|
+            klass.const_get(name) rescue nil
+          end
+          list << klass if klass
+          list
+        end
       end
   end
 end

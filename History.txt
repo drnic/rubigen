@@ -1,3 +1,10 @@
+== 1.3.1 2008-04-25
+
+* Fixed the require statements in generated tests for rails/merb generators
+* Rails::Generator::Base is a valid generator superclass
+* Rails generators have alternate template (based on standard NamedBase)
+* test helpers define RAILS_ROOT for rails generators
+
 == 1.3.0 2008-04-25
 
 * component_generator: specific subclasses for rails + merb generators,

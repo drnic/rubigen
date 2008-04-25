@@ -1,13 +1,7 @@
 require File.join(File.dirname(__FILE__), "test_generator_helper.rb")
 
-<% if generator_type.to_sym == :rails -%>
-module Rails; module Generator; end; end
-<% elsif generator_type.to_sym == :merb -%>
-module Merb; end
-<% end -%>
-<% if superclass_name != "RubiGen::Base" -%>
-class <%= superclass_name %> < RubiGen::Base
-end
+<% for requirement in superclass_requirement -%>
+require '<%= requirement %>'
 <% end -%>
 
 class Test<%= class_name %> < Test::Unit::TestCase

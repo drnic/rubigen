@@ -23,11 +23,20 @@ class ComponentGeneratorGenerator < RubiGen::Base
       m.directory "test"
 
       # Generator stub
-      m.template "generator.rb",              "#{path}/#{name}_generator.rb"
+      m.template generator,              "#{path}/#{name}_generator.rb"
       m.template "test.rb",                   "test/test_#{name}_generator.rb"
       m.file     "test_generator_helper.rb",  "test/test_generator_helper.rb"
       m.file     "usage",                     "#{path}/USAGE"
       m.readme   'readme'
+    end
+  end
+
+  def generator
+    case (generator_type.to_sym rescue nil)
+    when :rails
+      "rails_generator.rb"
+    else
+      "generator.rb"
     end
   end
 
@@ -39,6 +48,17 @@ class ComponentGeneratorGenerator < RubiGen::Base
       "Merb::GeneratorBase"
     else
       "RubiGen::Base"
+    end
+  end
+
+  def superclass_requirement
+    case (generator_type.to_sym rescue nil)
+    when :rails
+      ["rails_generator"]
+    when :merb
+      ["merb-core", "merb-gen"]
+    else
+      []
     end
   end
 

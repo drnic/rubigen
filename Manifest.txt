@@ -44,6 +44,7 @@ rubygems_generators/application_generator/templates/usage
 rubygems_generators/component_generator/USAGE
 rubygems_generators/component_generator/component_generator_generator.rb
 rubygems_generators/component_generator/templates/generator.rb
+rubygems_generators/component_generator/templates/rails_generator.rb
 rubygems_generators/component_generator/templates/readme
 rubygems_generators/component_generator/templates/test.rb
 rubygems_generators/component_generator/templates/test_generator_helper.rb
