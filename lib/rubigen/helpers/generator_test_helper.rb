@@ -84,7 +84,7 @@ module RubiGen
     # It takes a name or symbol without the <tt>test_</tt> part and an optional super class.
     # the contents of the class source file is passed to a block.
     def assert_generated_test_for(name, parent="Test::Unit::TestCase")
-      assert_generated_class "test/test_#{name.to_s.underscore}",parent do |body|
+      assert_generated_class "test/test_#{name.to_s.underscore}", parent do |body|
         yield body if block_given?
       end
     end
