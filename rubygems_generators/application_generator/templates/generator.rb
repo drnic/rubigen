@@ -1,12 +1,12 @@
 class <%= class_name %> < RubiGen::Base
-  
+
   DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],
                               Config::CONFIG['ruby_install_name'])
-  
+
   default_options :author => nil
-  
+
   attr_reader :name
-  
+
   def initialize(runtime_args, runtime_options = {})
     super
     usage if args.empty?
@@ -23,9 +23,11 @@ class <%= class_name %> < RubiGen::Base
 
       # Create stubs
       # m.template "template.rb",  "some_file_after_erb.rb"
+      # m.template_copy_each ["template.rb", "template2.rb"]
       # m.file     "file",         "some_file_copied"
-      
-      m.dependency "install_rubigen_scripts", [destination_root, <%= scope_str %>], 
+      # m.file_copy_each ["path/to/file", "path/to/file2"]
+
+      m.dependency "install_rubigen_scripts", [destination_root, <%= scope_str %>],
         :shebang => options[:shebang], :collision => :force
     end
   end
@@ -49,7 +51,7 @@ EOS
       #         "Default: none") { |options[:author]| }
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
     end
-    
+
     def extract_options
       # for each option, extract it into a local variable (and create an "attr_reader :author" at the top)
       # Templates can access these value via the attr_reader-generated methods, but not the

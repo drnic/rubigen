@@ -155,7 +155,7 @@ module RubiGen
     # directories, renders templates, and more.
     class Create < Base
 
-      # Check whether the given class names are already taken.  
+      # Check whether the given class names are already taken.
       # In the future, expand to check other namespaces
       # such as the rest of the user's app.
       def class_collisions(*class_names)
@@ -191,7 +191,7 @@ module RubiGen
       #   file 'config/empty.log', 'log/test.log', :chmod => 0664
       # :shebang sets the #!/usr/bin/ruby line for scripts
       #   file 'bin/generate.rb', 'script/generate', :chmod => 0755, :shebang => '/usr/bin/env ruby'
-      # :collision sets the collision option only for the destination file: 
+      # :collision sets the collision option only for the destination file:
       #   file 'settings/server.yml', 'config/server.yml', :collision => :skip
       #
       # Collisions are handled by checking whether the destination file
@@ -205,7 +205,7 @@ module RubiGen
 
         # If source and destination are identical then we're done.
         if destination_exists and identical?(source, destination, &block)
-          return logger.identical(relative_destination) 
+          return logger.identical(relative_destination)
         end
 
         # Check for and resolve file collisions.
@@ -259,7 +259,7 @@ module RubiGen
           file "#{path}#{file_name}", "#{path}#{file_name}", options
         end
       end
-      
+
       def folder(template_path, path=nil, options = {})
         template_path = "/" if template_path.blank?
         source = source_path(template_path)
@@ -268,7 +268,7 @@ module RubiGen
           file "#{template_path}#{file_name}", "#{path}#{file_name}", options
         end
       end
-      
+
       # Checks if the source and the destination file are identical. If
       # passed a block then the source file is a template that needs to first
       # be evaluated before being compared to the destination.
@@ -304,7 +304,7 @@ module RubiGen
           ERB.new(file.read, nil, '-').result(b)
         end
       end
-      
+
       def template_copy_each(files, path = nil, options = {})
         path = path ? "#{path}/" : ""
         files.each do |file_name|
@@ -329,7 +329,7 @@ module RubiGen
           logger.create relative_path
           unless options[:pretend]
             FileUtils.mkdir_p(path)
-      
+
             # Subversion doesn't do path adds, so we need to add
             # each directory individually.
             # So stack up the directory tree and add the paths to
@@ -362,8 +362,8 @@ module RubiGen
         files.reject! { |file| File.directory?(file) }
         files.map! { |path| path.sub("#{destination_root}/","") }
         files = files.uniq.sort
-        
-        
+
+
         destination         = destination_path(relative_destination)
         destination_exists  = File.exists?(destination)
 
@@ -380,7 +380,7 @@ module RubiGen
 
         # If we're pretending, back off now.
         return if options[:pretend]
-        
+
         # Write destination file with optional shebang.  Yield for content
         # if block given so templaters may render the source file.  If a
         # shebang is requested, replace the existing shebang or insert a
@@ -392,7 +392,7 @@ module RubiGen
 
         # Optionally add file to subversion
         system("svn add #{destination}") if options[:svn]
-        
+
       end
 
       # When creating a migration, it knows to find the first available file in db/migrate and use the migration.rb template.
@@ -484,7 +484,7 @@ end_message
               # If the directory is not in the status list, it
               # has no modifications so we can simply remove it
                 system("svn rm #{destination}")
-              end  
+              end
             else
               FileUtils.rm(destination)
             end
@@ -593,7 +593,7 @@ end_message
       def readme(*args)
         logger.readme args.join(', ')
       end
-      
+
       def migration_template(relative_source, relative_destination, options = {})
         migration_directory relative_destination
         logger.migration_template file_name
