@@ -1,3 +1,8 @@
+== 1.3.2 2008-05-19
+
+* app_gen/bin - includes #!/usr/bin/env ruby
+* added examples of file_copy_each and template_copy_each to generators
+
 == 1.3.1 2008-04-25
 
 * Fixed the require statements in generated tests for rails/merb generators
