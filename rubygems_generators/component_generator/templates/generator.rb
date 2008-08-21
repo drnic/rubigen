@@ -17,10 +17,12 @@ class <%= class_name %> < <%= superclass_name %>
       m.directory 'some_folder'
 
       # Create stubs
-      # m.template "template.rb",  "some_file_after_erb.rb"
+      # m.template           "template.rb.erb", "some_file_after_erb.rb"
       # m.template_copy_each ["template.rb", "template2.rb"]
-      # m.file     "file",         "some_file_copied"
+      # m.template_copy_each ["template.rb", "template2.rb"], "some/path"
+      # m.file           "file", "some_file_copied"
       # m.file_copy_each ["path/to/file", "path/to/file2"]
+      # m.file_copy_each ["path/to/file", "path/to/file2"], "some/path"
     end
   end
 

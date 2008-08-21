@@ -57,7 +57,7 @@ from its railties gem).</p>
 	<p>The rails_generator was hardcoded with Rails-specific dependencies (<code>RAILS_ROOT</code>), 
 Rails generators (&#8216;app&#8217; = Rails application; &#8216;model&#8217; = Rails model+tests+migration),
 and generally assumed it was the only generator framework within the Ruby world (it was).
-So, any RubyGem whose name ended with &#8216;_generator&#8217; was assumed to be a generator for
+So, any RubyGem whose name ended with &#8217;_generator&#8217; was assumed to be a generator for
 a Rails application.</p>
 
 
@@ -93,7 +93,7 @@ rather than be used on its own.</p>
 
 	<ol>
 	<li>To generate an initial stub for developers, e.g. <code>rails</code> generated a stub to write a Rails application. <code>newgem</code> generates a stub to write a RubyGem. <br/>
-  <span class="caps">BTW</span> &#8211; RubiGen has a builtin application <code>ruby_app</code> which generates a bare-bones Ruby application stub (lib, test, and script folders, plus a Rakefile, and a script/generate script)</li>
+  <span class="caps">BTW </span>- RubiGen has a builtin application <code>ruby_app</code> which generates a bare-bones Ruby application stub (lib, test, and script folders, plus a Rakefile, and a script/generate script)</li>
 		<li>To generate components within their development areas, e.g. Rails had its <code>script/generate</code> script within each Rails application, which hooked back into the rails_generator to lookup and execute generators.</li>
 	</ol>
 
@@ -156,7 +156,7 @@ for a RubyGem.</p>
 	<p>For more documentation, run <code>script/generator application_generator</code></p>
 
 
-	<h3><span class="caps">DIY</span></h3>
+	<h3>DIY</h3>
 
 
 	<p>Without RubiGen, to give your users a head start and create a stub for them, you will 
@@ -215,7 +215,7 @@ as the generators are loaded from all RubyGem&#8217;s having <code>/app_generato
 
 	<p>So, for your RubyGem, you need to keep the <code>/app_generators</code> folder (as you are creating an 
 Application Generator, not a Component Generator), but change <code>newgem</code> to <code>your gem name</code> in
-all the subfolders and files. <span class="caps">ESPECIALLY</span> <code>newgem_generator.rb</code> -&gt; <code>yourgem_generator.rb</code>,
+all the subfolders and files. <span class="caps">ESPECIALLY </span><code>newgem_generator.rb</code> &rarr; <code>yourgem_generator.rb</code>,
 as this is how the generator is discovered (via <code>RubiGen::Base.use_application_sources!</code>).</p>
 
 

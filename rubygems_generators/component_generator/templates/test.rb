@@ -32,7 +32,8 @@ class Test<%= class_name %> < Test::Unit::TestCase
   def test_generator_without_options
     name = "myapp"
     run_generator('<%= name %>', [name], sources)
-    assert_generated_file("some_file")
+    assert_directory_exists "some/directory"
+    assert_generated_file   "some_file"
   end
 
   private
