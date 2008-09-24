@@ -55,29 +55,20 @@
     </div>
     <h1>Ruby Generator Framework</h1>
 <h2>What</h2>
-<p>A framework to allow Ruby applications to generate file/folder stubs <br />
-(like the <code>rails</code> command does for Ruby on Rails, and the &#8216;script/generate&#8217;<br />
-command within a Rails application during development).</p>
+<p>A framework to allow Ruby applications to generate file/folder stubs (like the <code>rails</code> command does for Ruby on Rails, and the &#8216;script/generate&#8217; command within a Rails application during development).</p>
 <p>The RubyConf 2007 presentation is now <a href="http://rubyconf2007.confreaks.com/d3t1p1_rubigen.html">online</a> together with the theme from the A-Team.</p>
 <h2>Background</h2>
-<p>RubiGen is originally extracted from Ruby on Rails (specifically the rails_generator<br />
-from its railties gem).</p>
-<p>The rails_generator was hardcoded with Rails-specific dependencies (<code>RAILS_ROOT</code>), <br />
-Rails generators (&#8216;app&#8217; = Rails application; &#8216;model&#8217; = Rails model+tests+migration),<br />
-and generally assumed it was the only generator framework within the Ruby world (it was).<br />
-So, any RubyGem whose name ended with &#8216;_generator&#8217; was assumed to be a generator for<br />
-a Rails application.</p>
+<p>RubiGen is originally extracted from Ruby on Rails (specifically the rails_generator from its railties gem).</p>
+<p>The rails_generator was hardcoded with Rails-specific dependencies (<code>RAILS_ROOT</code>), Rails generators (&#8216;app&#8217; = Rails application; &#8216;model&#8217; = Rails model+tests+migration), and generally assumed it was the only generator framework within the Ruby world (it was). So, any RubyGem whose name ended with &#8216;_generator&#8217; was assumed to be a generator for a Rails application.</p>
 <p>But if you are developing a Merb application, then you may want a different set of generators.<br />
 If you are developing a RubyGem, then you will want a different set of generators.</p>
 <p>RubiGen exists to give different development environments their own generator framework.</p>
 <h2>Installing</h2>
-<p>RubiGen is only required at development time, and normally isn&#8217;t required at deployment time<br />
-(unless your application uses it to generate files etc for its users).</p>
+<p>RubiGen is only required at development time, and normally isn&#8217;t required at deployment time (unless your application uses it to generate files etc for its users).</p>
 <p>On your development machine:</p>
 <p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">rubigen</span></pre></p>
 <h2>Usage</h2>
-<p>RubiGen will be normally integrated into another RubyGem, such as <code>newgem</code> or <code>merb</code> or <code>camping</code>,<br />
-rather than be used on its own.</p>
+<p>RubiGen will be normally integrated into another RubyGem, such as <code>newgem</code> or <code>merb</code> or <code>camping</code>, rather than be used on its own.</p>
 <p>These frameworks might use RubiGen for two reasons:</p>
 <ol>
 	<li>To generate an initial stub for developers, e.g. <code>rails</code> generated a stub to write a Rails application. <code>newgem</code> generates a stub to write a RubyGem. <br/><br />
@@ -268,7 +259,7 @@ script/generate component_generator
 <h2>Contact</h2>
 <p>Comments are welcome. Send an email to <a href="mailto:drnicwilliams@gmail.com">Dr Nic Williams</a> via the <a href="http://groups.google.com/group/rubigen">forum</a></p>
     <p class="coda">
-      <a href="drnicwilliams@gmail.com">Dr Nic Williams</a>, 19th May 2008<br>
+      <a href="drnicwilliams@gmail.com">Dr Nic Williams</a>, 24th September 2008<br>
       Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
     </p>
 </div>

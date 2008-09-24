@@ -4,22 +4,15 @@ h1. Ruby Generator Framework
 
 h2. What
 
-A framework to allow Ruby applications to generate file/folder stubs 
-(like the <code>rails</code> command does for Ruby on Rails, and the 'script/generate'
-command within a Rails application during development).
+A framework to allow Ruby applications to generate file/folder stubs (like the <code>rails</code> command does for Ruby on Rails, and the 'script/generate' command within a Rails application during development).
 
 The RubyConf 2007 presentation is now "online":http://rubyconf2007.confreaks.com/d3t1p1_rubigen.html together with the theme from the A-Team.
 
 h2. Background
 
-RubiGen is originally extracted from Ruby on Rails (specifically the rails_generator
-from its railties gem).
+RubiGen is originally extracted from Ruby on Rails (specifically the rails_generator from its railties gem).
 
-The rails_generator was hardcoded with Rails-specific dependencies (<code>RAILS_ROOT</code>), 
-Rails generators ('app' = Rails application; 'model' = Rails model+tests+migration),
-and generally assumed it was the only generator framework within the Ruby world (it was).
-So, any RubyGem whose name ended with '_generator' was assumed to be a generator for
-a Rails application.
+The rails_generator was hardcoded with Rails-specific dependencies (<code>RAILS_ROOT</code>), Rails generators ('app' = Rails application; 'model' = Rails model+tests+migration), and generally assumed it was the only generator framework within the Ruby world (it was). So, any RubyGem whose name ended with '_generator' was assumed to be a generator for a Rails application.
 
 But if you are developing a Merb application, then you may want a different set of generators.
 If you are developing a RubyGem, then you will want a different set of generators.
@@ -28,8 +21,7 @@ RubiGen exists to give different development environments their own generator fr
 
 h2. Installing
 
-RubiGen is only required at development time, and normally isn't required at deployment time
-(unless your application uses it to generate files etc for its users).
+RubiGen is only required at development time, and normally isn't required at deployment time (unless your application uses it to generate files etc for its users).
 
 On your development machine:
 
@@ -37,8 +29,7 @@ On your development machine:
 
 h2. Usage
 
-RubiGen will be normally integrated into another RubyGem, such as <code>newgem</code> or <code>merb</code> or <code>camping</code>,
-rather than be used on its own.
+RubiGen will be normally integrated into another RubyGem, such as <code>newgem</code> or <code>merb</code> or <code>camping</code>, rather than be used on its own.
 
 These frameworks might use RubiGen for two reasons:
   
