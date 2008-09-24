@@ -96,17 +96,20 @@ pre, code {
 .number { color: #F99; }
 .expr { color: #227; }
 
-#version {
+.sidebar {
   float: right;
+}
+
+#version {
+	width: 170px;
+  padding: 15px 20px 10px 20px;
+  margin: 0 auto;
   text-align: right;
   font-family: sans-serif;
   font-weight: normal;
+  border: 3px solid #DDD;
   background-color: #468EFF;
   color: #EEE;
-  padding: 15px 20px 10px 20px;
-  margin: 0 auto;
-	margin-top: 15px;
-  border: 3px solid #DDD;
 }
 
 #version .numbers {
@@ -134,5 +137,19 @@ pre, code {
 .clickable {
 	cursor:	pointer; 
 	cursor:	hand;
+}
+
+#twitter_search {
+	margin-top: 40px;
+  border: 3px solid #DDD;
+  background-color: #468EFF;
+}
+
+#twitter_search h3 {
+	margin-bottom: 0px;
+}
+
+#twitter_search center b {
+	display: none;
 }
 
