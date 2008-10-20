@@ -84,6 +84,8 @@ module RubiGen
 
       # Add a source to the beginning of the list.
       def prepend_sources(*args)
+        sources = self.sources
+        reset_sources
         write_inheritable_array(:sources, args.flatten + sources)
         invalidate_cache!
       end
@@ -151,7 +153,7 @@ module RubiGen
         unless @found[generator_name] 
           chars = generator_name.scan(/./).map{|c|"#{c}.*?"}
           rx = /^#{chars}$/
-          gns = cache.select{|spec| spec.name =~ rx }
+          gns = cache.select {|spec| spec.name =~ rx }
           @found[generator_name] ||= gns.first if gns.length == 1
           raise GeneratorError, "Pattern '#{generator_name}' matches more than one generator: #{gns.map{|sp|sp.name}.join(', ')}" if gns.length > 1
         end

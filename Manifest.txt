@@ -8,7 +8,6 @@ app_generators/ruby_app/USAGE
 app_generators/ruby_app/ruby_app_generator.rb
 app_generators/ruby_app/templates/README.txt
 app_generators/ruby_app/templates/Rakefile
-app_generators/ruby_app/templates/configs/empty_log
 app_generators/ruby_app/templates/lib/module.rb
 app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
@@ -58,9 +57,6 @@ setup.rb
 tasks/deployment.rake
 tasks/environment.rake
 tasks/website.rake
-test/examples_from_rails/generator_test_helper.rb
-test/examples_from_rails/test_rails_resource_generator.rb
-test/examples_from_rails/test_rails_scaffold_generator.rb
 test/test_application_generator_generator.rb
 test/test_component_generator_generator.rb
 test/test_generate_builtin_application.rb
