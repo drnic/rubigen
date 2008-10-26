@@ -107,7 +107,7 @@ The `bin/newgem` script is very simple, and looks like:
 
     if %w(-v --version).include? ARGV.first
       require 'newgem/version'
-      puts "#{File.basename($0)} #{Newgem::VERSION::STRING}"
+      puts "#{File.basename($0)} #{Newgem::VERSION}"
       exit(0)
     end
 

@@ -8,6 +8,10 @@ rescue LoadError
   require 'active_support' 
 end
 
+module RubiGen
+  VERSION = '1.3.3'
+end
+
 require 'rubigen/base'
 require 'rubigen/lookup'
 require 'rubigen/commands'

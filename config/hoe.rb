@@ -1,4 +1,4 @@
-require 'rubigen/version'
+require 'rubigen'
 
 AUTHOR = ['Dr Nic Williams', 'Jeremy Kemper']  # can also be an array of Authors
 EMAIL = "drnicwilliams@gmail.com"
@@ -34,7 +34,7 @@ end
 REV = nil 
 # UNCOMMENT IF REQUIRED: 
 # REV = `svn info`.each {|line| if line =~ /^Revision:/ then k,v = line.split(': '); break v.chomp; else next; end} rescue nil
-VERS = Rubigen::VERSION::STRING + (REV ? ".#{REV}" : "")
+VERS = RubiGen::VERSION
 RDOC_OPTS = ['--quiet', '--title', 'rubigen documentation',
     "--opname", "index.html",
     "--line-numbers", 

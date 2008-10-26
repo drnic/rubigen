@@ -32,7 +32,6 @@ lib/rubigen/scripts/generate.rb
 lib/rubigen/scripts/update.rb
 lib/rubigen/simple_logger.rb
 lib/rubigen/spec.rb
-lib/rubigen/version.rb
 rubygems_generators/application_generator/USAGE
 rubygems_generators/application_generator/application_generator_generator.rb
 rubygems_generators/application_generator/templates/bin
@@ -52,7 +51,6 @@ rubygems_generators/component_generator/templates/usage
 script/destroy
 script/generate
 script/txt2html
-script/txt2js
 setup.rb
 tasks/deployment.rake
 tasks/environment.rake

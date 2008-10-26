@@ -5,7 +5,7 @@ require 'rubigen'
 
 if %w(-v --version).include? ARGV.first
   require 'rubigen/version'
-  puts "#{File.basename($0)} (via rubigen - #{Rubigen::VERSION::STRING})"
+  puts "#{File.basename($0)} (via rubigen - #{RubiGen::VERSION})"
   exit(0)
 end
 
