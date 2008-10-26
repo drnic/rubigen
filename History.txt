@@ -1,6 +1,7 @@
 == 1.3.3 2008-10-21
 
 * prepend_sources correctly places arguments at start of sources list
+* removed lib/rubigen/version.rb; RubiGen::VERSION is in lib/rubigen.rb now; there is no RubiGen::VERSION::STRING
 
 == 1.3.2 2008-05-19
 
