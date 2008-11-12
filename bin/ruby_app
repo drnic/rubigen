@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require File.dirname(__FILE__) + '/../lib/rubigen/version'
 if %w(--version -v).include? ARGV.first
   puts "Rails #{RubiGen::VERSION}"
   exit(0)
