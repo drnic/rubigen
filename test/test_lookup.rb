@@ -8,7 +8,7 @@ class TestLookup < Test::Unit::TestCase
   end
   
   def test_lookup_component
-    assert_nothing_raised(GeneratorError, "Could not find test_unit generator") { Base.lookup('test_unit') }
+    assert_nothing_raised(GeneratorError, "Could not find install_rubigen_scripts generator") { Base.lookup('install_rubigen_scripts') }
   end
   
   def test_lookup_unknown_component

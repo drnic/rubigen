@@ -25,7 +25,8 @@ class TestGenerateBuiltinApplication < Test::Unit::TestCase
 
   private
   def sources
-    [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__),"..", generator_path))
+    [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__),"..", generator_path)),
+     RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__),"..", "generators"))
     ]
   end
   
