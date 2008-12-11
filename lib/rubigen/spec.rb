@@ -6,7 +6,7 @@ module RubiGen
     attr_reader :name, :path, :source
 
     def initialize(name, path, source)
-      @name, @path, @source = name, path, source
+      @name, @path, @source, @klass = name, path, source, nil
     end
 
     # Look up the generator class.  Require its class file, find the class

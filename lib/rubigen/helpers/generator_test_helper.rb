@@ -13,8 +13,9 @@ module RubiGen
 
     # Instatiates the Generator
     def build_generator(name, params, sources, options)
+      @stdout ||= StringIO.new
       options.merge!(:collision => :force)  # so no questions are prompted
-      options.merge!(:stdout => @stdout || StringIO.new)  # so stdout is piped to a StringIO
+      options.merge!(:stdout => @stdout)  # so stdout is piped to a StringIO
       if sources.is_a?(Symbol)
         if sources == :app
           RubiGen::Base.use_application_sources!
