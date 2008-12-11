@@ -56,7 +56,7 @@ class RubyAppGenerator < RubiGen::Base
       opts.separator 'Options:'
       opts.on("-r", "--ruby=path", String,
              "Path to the Ruby binary of your choice (otherwise scripts use env, dispatchers current path).",
-             "Default: #{DEFAULT_SHEBANG}") { |options[:shebang]| }
+             "Default: #{DEFAULT_SHEBANG}") { |v| options[:shebang] = v }
     end
     
 
