@@ -1,3 +1,8 @@
+== 1.4.0 2008-12-11 NOT RELEASED
+
+* rubigen tests now pass against ruby 1.9.0 and ruby 1.9.1(prerelease 2)
+* puts are sent to an explicit #stdout which can be STDOUT or a StringIO passed from tests; test output is now clean!
+
 == 1.3.4 2008-11-12
 
 * ruby_app: fixed reference to non-existent version.rb [jperkins]
