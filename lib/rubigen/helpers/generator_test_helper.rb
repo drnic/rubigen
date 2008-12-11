@@ -31,13 +31,11 @@ module RubiGen
 
     # Silences the logger temporarily and returns the output as a String
     def silence_generator
-      logger_original=RubiGen::Base.logger
-      myout=StringIO.new
-      RubiGen::Base.logger=RubiGen::SimpleLogger.new(myout)
-      # TODO redirect $stdout to myout
+      logger_original      = RubiGen::Base.logger
+      myout                = StringIO.new
+      RubiGen::Base.logger = RubiGen::SimpleLogger.new(myout)
       yield if block_given?
-      RubiGen::Base.logger=logger_original
-      # TODO fix $stdout again
+      RubiGen::Base.logger = logger_original
       myout.string
     end
 
