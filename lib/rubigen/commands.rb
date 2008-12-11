@@ -99,18 +99,18 @@ module RubiGen
               Tempfile.open(File.basename(destination), File.dirname(dst)) do |temp|
                 temp.write render_file(src, file_options, &block)
                 temp.rewind
-                $stdout.puts `#{diff_cmd} #{dst} #{temp.path}`
+                $stdout.stdout.puts `#{diff_cmd} #{dst} #{temp.path}`
               end
-              puts "retrying"
+              stdout.puts "retrying"
               raise 'retry diff'
             when /a/i
-              $stdout.puts "forcing #{spec.name}"
+              $stdout.stdout.puts "forcing #{spec.name}"
               options[:collision] = :force
             when /i/i
-              $stdout.puts "ignoring #{spec.name}"
+              $stdout.stdout.puts "ignoring #{spec.name}"
               options[:collision] = :skip
             when /q/i
-              $stdout.puts "aborting #{spec.name}"
+              $stdout.stdout.puts "aborting #{spec.name}"
               raise SystemExit
             when /n/i then :skip
             when /y/i then :force
@@ -352,7 +352,7 @@ module RubiGen
       def readme(*relative_sources)
         relative_sources.flatten.each do |relative_source|
           logger.readme relative_source
-          puts File.read(source_path(relative_source)) unless options[:pretend]
+          stdout.puts File.read(source_path(relative_source)) unless options[:pretend]
         end
       end
 
@@ -545,7 +545,7 @@ end_message
 
         migration_file_name = template_options[:migration_file_name] || file_name
         unless migration_exists?(migration_file_name)
-          puts "There is no migration named #{migration_file_name}"
+          stdout.puts "There is no migration named #{migration_file_name}"
           return
         end
 

@@ -81,7 +81,7 @@ module RubiGen
 
     # Declare default options for the generator.  These options
     # are inherited to subclasses.
-    default_options :collision => :ask, :quiet => false
+    default_options :collision => :ask, :quiet => false, :stdout => STDOUT
 
     # A logger instance available everywhere in the generator.
     cattr_accessor :logger
@@ -90,7 +90,7 @@ module RubiGen
     # Spec describing where it was found.
     class_inheritable_accessor :spec
 
-    attr_reader :source_root, :destination_root, :args
+    attr_reader :source_root, :destination_root, :args, :stdout
 
     def initialize(runtime_args, runtime_options = {})
       @args = runtime_args
@@ -106,6 +106,8 @@ module RubiGen
 
       # Silence the logger if requested.
       logger.quiet = options[:quiet]
+      
+      @stdout = options[:stdout]
 
       # Raise usage error if help is requested.
       usage if options[:help]
@@ -161,7 +163,6 @@ module RubiGen
       name
     end
     
-
     protected
       # Convenience method for generator subclasses to record a manifest.
       def record

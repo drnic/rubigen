@@ -1,3 +1,5 @@
+require 'stringio'
+
 module RubiGen
   module GeneratorTestHelper
     # Runs the create command (like the command line does)
@@ -12,6 +14,7 @@ module RubiGen
     # Instatiates the Generator
     def build_generator(name, params, sources, options)
       options.merge!(:collision => :force)  # so no questions are prompted
+      options.merge!(:stdout => @stdout || StringIO.new)  # so stdout is piped to a StringIO
       if sources.is_a?(Symbol)
         if sources == :app
           RubiGen::Base.use_application_sources!
@@ -120,6 +123,7 @@ module RubiGen
   
     def bare_setup
       FileUtils.mkdir_p(APP_ROOT)
+      @stdout = StringIO.new
     end
   
     def bare_teardown
