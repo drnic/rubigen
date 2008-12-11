@@ -1,0 +1,13 @@
+Autotest.add_hook :initialize do |at|
+  at.clear_mappings
+  
+  at.add_mapping(%r%^test/test_.*.rb$%) do |filename, _| 
+    filename 
+  end
+  at.add_mapping(/lib\/(.*)\.rb/) do |_, m|
+    ["test/test_#{m[1]}.rb"]
+  end
+  # at.add_mapping(/.*_?generators\/(.*)\/(.*)_generator\.rb/) do |_, m|
+  #   ["test/test_#{m[1]}.rb"]
+  # end
+end
