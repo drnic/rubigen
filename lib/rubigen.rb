@@ -10,7 +10,7 @@ rescue LoadError
 end
 
 module RubiGen
-  VERSION = '1.3.4'
+  VERSION = '1.4.0'
 end
 
 require 'rubigen/base'
