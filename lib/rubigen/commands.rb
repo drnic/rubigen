@@ -39,6 +39,7 @@ module RubiGen
       # Replay action manifest.  RewindBase subclass rewinds manifest.
       def invoke!
         manifest.replay(self)
+        after_generate
       end
 
       def dependency(generator_name, args, runtime_options = {})
@@ -53,6 +54,9 @@ module RubiGen
 
       # Does nothing for all commands except Create.
       def readme(*args)
+      end
+
+      def after_generate
       end
 
       protected
@@ -436,7 +440,7 @@ module RubiGen
         # Raise a usage error with an informative WordNet suggestion.
         # Thanks to Florian Gross (flgr).
         def raise_class_collision(class_name)
-          message = <<end_message
+          message = <<-end_message
 The name '#{class_name}' is reserved.
 Please choose an alternative and run this generator again.
 end_message
@@ -471,7 +475,7 @@ end_message
       # Remove a file if it exists and is a file.
       def file(relative_source, relative_destination, file_options = {})
         destination = destination_path(relative_destination)
-        if File.exists?(destination)
+        if File.exist?(destination)
           logger.rm relative_destination
           unless options[:pretend]
             if options[:svn]
@@ -484,6 +488,19 @@ end_message
               # If the directory is not in the status list, it
               # has no modifications so we can simply remove it
                 system("svn rm #{destination}")
+              end
+            elsif options[:git]
+              if options[:git][:new][relative_destination]
+                # file has been added, but not committed
+                system("git reset HEAD #{relative_destination}")
+                FileUtils.rm(destination)
+              elsif options[:git][:modified][relative_destination]
+                # file is committed and modified
+                system("git rm -f #{relative_destination}")
+              else
+                # If the directory is not in the status list, it
+                # has no modifications so we can simply remove it
+                system("git rm #{relative_destination}")
               end
             else
               FileUtils.rm(destination)
@@ -506,7 +523,7 @@ end_message
         until parts.empty?
           partial = File.join(parts)
           path = destination_path(partial)
-          if File.exists?(path)
+          if File.exist?(path)
             if Dir[File.join(path, '*')].empty?
               logger.rmdir partial
               unless options[:pretend]
@@ -521,6 +538,8 @@ end_message
                   # has no modifications so we can simply remove it
                     system("svn rm #{path}")
                   end
+                # I don't think git needs to remove directories?..
+                # or maybe they have special consideration...
                 else
                   FileUtils.rmdir(path)
                 end
