@@ -75,9 +75,10 @@ end
 
 When %r{run local executable '(.*)' with arguments '(.*)'} do |executable, arguments|
   @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
+  @stderr = File.expand_path(File.join(@tmp_root, "executable.err"))
   executable = File.expand_path(File.join(File.dirname(__FILE__), "/../../bin", executable))
   in_project_folder do
-    system "ruby #{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
+    system "ruby #{executable} #{arguments} > #{@stdout} 2> #{@stderr}"
   end
 end
 

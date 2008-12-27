@@ -7,4 +7,4 @@ require File.expand_path(File.dirname(__FILE__) + "/../lib/rubigen")
 
 require "rubigen/cli"
 
-Rubigen::CLI.execute(STDOUT, ARGV)
+Rubigen::CLI.execute(STDOUT, ARGV, :destination => File.expand_path("."))

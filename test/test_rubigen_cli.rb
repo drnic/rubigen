@@ -1,8 +1,23 @@
-require File.join(File.dirname(__FILE__), "test_helper.rb")
+require File.dirname(__FILE__) + "/test_generator_helper"
 require 'rubigen/cli'
 
 class TestRubigenCli < Test::Unit::TestCase
+  include RubiGen::GeneratorTestHelper
   attr_reader :stdout
+
+  context "run executable with scope 'rubygems'" do
+    setup do
+      bare_setup
+      Rubigen::CLI.new.execute(@stdout_io = StringIO.new, 
+        %w[rubygems component_generator name scope], :backtrace => true)
+      @stdout_io.rewind
+      @stdout = @stdout_io.read
+    end
+
+    should "create main generator manifest" do
+      assert_file_exists("scope_generators/name/name_generator.rb")
+    end
+  end
   
   context "run executable with scope 'rubygems'" do
     setup do

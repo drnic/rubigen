@@ -4,18 +4,21 @@ module Rubigen
   class CLI
     attr_reader :stdout
     
-    def self.execute(stdout, arguments=[])
-      self.new.execute(stdout, arguments)
+    def self.execute(stdout, arguments, runtime_arguments = {})
+      self.new.execute(stdout, arguments, runtime_arguments)
     end
 
-    def execute(stdout, arguments=[])
+    def execute(stdout, arguments, runtime_arguments = {})
       @stdout = stdout
       main_usage and return unless scope = arguments.shift
       scopes = scope.split(",")
-      
+      runtime_arguments.merge!(:stdout => stdout, :no_exit => true, :backtrace => true)
+
+      RubiGen::Base.logger = RubiGen::SimpleLogger.new(stdout)
+
       require 'rubigen/scripts/generate'
       RubiGen::Base.use_component_sources!(scopes.map(&:to_sym))
-      RubiGen::Scripts::Generate.new.run(arguments, :stdout => stdout, :no_exit => true)
+      RubiGen::Scripts::Generate.new.run(arguments, runtime_arguments)
     end
     
     def main_usage

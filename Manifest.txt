@@ -31,8 +31,10 @@ app_generators/ruby_app/templates/Rakefile
 app_generators/ruby_app/templates/lib/module.rb
 app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
+bin/rubigen
 bin/ruby_app
 features/development.feature
+features/help.feature
 features/steps/common.rb
 features/steps/env.rb
 generators/install_rubigen_scripts/install_rubigen_scripts_generator.rb
@@ -41,6 +43,7 @@ generators/install_rubigen_scripts/templates/script/generate
 generators/install_rubigen_scripts/templates/script/win_script.cmd
 lib/rubigen.rb
 lib/rubigen/base.rb
+lib/rubigen/cli.rb
 lib/rubigen/commands.rb
 lib/rubigen/generated_attribute.rb
 lib/rubigen/helpers/generator_test_helper.rb
@@ -94,6 +97,7 @@ test/test_generator_helper.rb
 test/test_helper.rb
 test/test_install_rubigen_scripts_generator.rb
 test/test_lookup.rb
+test/test_rubigen_cli.rb
 test_unit_generators/test_unit/USAGE
 test_unit_generators/test_unit/templates/test.rb
 test_unit_generators/test_unit/test_unit_generator.rb
