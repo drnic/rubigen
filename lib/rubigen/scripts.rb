@@ -43,14 +43,19 @@ module RubiGen
         def usage_message
           usage = "\nInstalled Generators\n"
           RubiGen::Base.sources.inject({}) do |mem, source|
+            # Using an association list instead of a hash to preserve order,
+            # for aesthetic reasons more than anything else.
             label = source.label.to_s.capitalize
-            mem[label] ||= []
-            mem[label] |= source.names(:visible)
+            pair = mem.assoc(label)
+            mem << (pair = [label, []]) if pair.nil?
+            pair[1] |= source.names
             mem
-          end.each_pair do |label, names|
+          end.each do |label, names|
             usage << "  #{label}: #{names.join(', ')}\n" unless names.empty?
           end
 
+          # TODO - extensible blurbs for rails/newgem/adhearsion etc
+          # e.g. for rails http://github.com/rails/rails/tree/daee6fd92ac16878f6806c3382a9e74592aa9656/railties/lib/rails_generator/scripts.rb#L50-74
           usage << <<-end_blurb
 
 More are available at http://rubigen.rubyforge.org/

@@ -13,6 +13,9 @@ module RubiGen::Scripts
         usage << "  #{label}: #{names.join(', ')}\n" unless names.empty?
       end
 
+      # TODO - extensible blurbs for rails/newgem/adhearsion etc
+      # e.g. for rails script/destroy
+      # http://github.com/rails/rails/tree/daee6fd92ac16878f6806c3382a9e74592aa9656/railties/lib/rails_generator/scripts/destroy.rb
       usage << <<-end_blurb
 
 This script will destroy all files created by the corresponding 
