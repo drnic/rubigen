@@ -163,6 +163,9 @@ module RubiGen
       name
     end
     
+    def after_generate
+    end
+
     protected
       # Convenience method for generator subclasses to record a manifest.
       def record

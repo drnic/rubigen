@@ -56,9 +56,6 @@ module RubiGen
       def readme(*args)
       end
 
-      def after_generate
-      end
-
       protected
         def migration_directory(relative_path)
           directory(@migration_directory = relative_path)
