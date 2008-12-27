@@ -9,11 +9,13 @@ module RubiGen
     class Base
       include Options
       default_options :collision => :ask, :quiet => false
+      attr_reader :stdout
 
       # Run the generator script.  Takes an array of unparsed arguments
       # and a hash of parsed arguments, takes the generator as an option
       # or first remaining argument, and invokes the requested command.
       def run(args = [], runtime_options = {})
+        @stdout = runtime_options[:stdout] || $stdout
         begin
           parse!(args.dup, runtime_options)
         rescue OptionParser::InvalidOption => e
@@ -29,9 +31,9 @@ module RubiGen
         # Look up generator instance and invoke command on it.
         RubiGen::Base.instance(options[:generator], args, options).command(options[:command]).invoke!
       rescue => e
-        puts e
-        puts "  #{e.backtrace.join("\n  ")}\n" if options[:backtrace]
-        raise SystemExit
+        stdout.puts e
+        stdout.puts "  #{e.backtrace.join("\n  ")}\n" if options[:backtrace]
+        raise SystemExit unless options[:no_exit]
       end
 
       protected

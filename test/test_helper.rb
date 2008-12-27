@@ -25,3 +25,5 @@ rescue LoadError
 rescue NoMethodError
   load_mocha
 end
+
+require "shoulda"
