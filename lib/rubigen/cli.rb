@@ -13,7 +13,7 @@ module Rubigen
       main_usage and return unless scope = arguments.shift
       scopes = scope.split(",").map(&:to_sym)
       
-      runtime_arguments.merge!(:stdout => stdout, :no_exit => true, :backtrace => true)
+      runtime_arguments.merge!(:stdout => stdout, :no_exit => true)
       RubiGen::Base.logger = RubiGen::SimpleLogger.new(stdout)
 
       require 'rubigen/scripts/generate'
