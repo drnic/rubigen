@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/options'
+require File.dirname(__FILE__) + '/options' unless Object.const_defined?("RubiGen") && RubiGen.const_defined?("Base")
 
 module RubiGen
   module Scripts
