@@ -49,7 +49,7 @@ module RubiGen
   module Lookup
     def self.included(base)
       base.extend(ClassMethods)
-      base.use_component_sources!
+      # base.use_component_sources!  # TODO is this required since it has no scope/source context
     end
 
     # Convenience method to instantiate another generator.
@@ -71,7 +71,7 @@ module RubiGen
             end
             write_inheritable_attribute(:sources, diff)
           end
-          use_component_sources! if read_inheritable_attribute(:sources).blank?
+          active.use_component_sources! if read_inheritable_attribute(:sources).blank?
         end
         read_inheritable_attribute(:sources)
       end
