@@ -11,13 +11,13 @@ module Rubigen
     def execute(stdout, arguments, runtime_arguments = {})
       @stdout = stdout
       main_usage and return unless scope = arguments.shift
-      scopes = scope.split(",")
+      scopes = scope.split(",").map(&:to_sym)
+      
       runtime_arguments.merge!(:stdout => stdout, :no_exit => true, :backtrace => true)
-
       RubiGen::Base.logger = RubiGen::SimpleLogger.new(stdout)
 
       require 'rubigen/scripts/generate'
-      RubiGen::Base.use_component_sources!(scopes.map(&:to_sym))
+      RubiGen::Base.use_component_sources!(scopes)
       RubiGen::Scripts::Generate.new.run(arguments, runtime_arguments)
     end
     
