@@ -86,6 +86,11 @@ module RubiGen
     # A logger instance available everywhere in the generator.
     cattr_accessor :logger
 
+    # Either RubiGen::Base, or a subclass (e.g. Rails::Generator::Base)
+    # Currently used to determine the lookup paths via the overriden const_missing mechansim
+    # in lookup.rb
+    cattr_accessor :active
+
     # Every generator that is dynamically looked up is tagged with a
     # Spec describing where it was found.
     class_inheritable_accessor :spec

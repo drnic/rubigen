@@ -8,6 +8,8 @@
 * support for RAILS_ROOT as a destination root
 * removed references to Merb which now has its own generator system; can access any merb
   generators via `rubigen` helper app
+* RubiGen::Base.active can be changed to a RubiGen::Base subclass that will be used
+  for lookups (e.g. RubiGen::Base.active = Rails::Generator::Base)
 
 == 1.4.0 2008-12-11
 

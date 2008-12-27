@@ -1,6 +1,7 @@
 = TODO
 
+* default #manifest to clone over any folders + files + apply erb to any *.erb files
+* rspec examples generated for application_generator and component_generator as per newgem
 * Labels for displays based on scope (common, rails, newgem), not rubygems, builtin, etc. Perhaps use one PathSource per scope.
   See RubiGen::Scripts::Base#usage_message
 * Local generators (~/.rubigen) can be scoped (~/.rubigen/rails_generators)
-* default #manifest to clone over any folders + files + apply erb to any *.erb files

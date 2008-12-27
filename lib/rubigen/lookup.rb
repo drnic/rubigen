@@ -8,7 +8,7 @@ class Object
     def lookup_missing_generator(class_id)
       if md = /(.+)Generator$/.match(class_id.to_s)
         name = md.captures.first.demodulize.underscore
-        RubiGen::Base.lookup(name).klass
+        RubiGen::Base.active.lookup(name).klass
       else
         const_missing_before_generators(class_id)
       end

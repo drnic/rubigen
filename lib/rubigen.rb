@@ -23,4 +23,5 @@ RubiGen::Base.send(:include, RubiGen::Commands)
 # Set up a default logger for convenience.
 require 'rubigen/simple_logger'
 RubiGen::Base.logger = RubiGen::SimpleLogger.new(STDOUT)
+RubiGen::Base.active = RubiGen::Base
 
