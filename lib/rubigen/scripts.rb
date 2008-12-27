@@ -42,7 +42,7 @@ module RubiGen
 
         def usage_message
           usage = "\nInstalled Generators\n"
-          RubiGen::Base.sources.inject({}) do |mem, source|
+          RubiGen::Base.sources.inject([]) do |mem, source|
             # Using an association list instead of a hash to preserve order,
             # for aesthetic reasons more than anything else.
             label = source.label.to_s.capitalize

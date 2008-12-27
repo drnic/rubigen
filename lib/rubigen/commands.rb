@@ -97,7 +97,7 @@ module RubiGen
       private
         # Ask the user interactively whether to force collision.
         def force_file_collision?(destination, src, dst, file_options = {}, &block)
-          stdout.print "overwrite #{destination}? [Ynaiqd] "
+          stdout.print "overwrite #{destination}? (enter \"h\" for help) [Ynaiqd] "
           stdout.flush
           case $stdin.gets.chomp
             when /\Ad\z/i
@@ -119,7 +119,17 @@ module RubiGen
               raise SystemExit
             when /\An\z/i then :skip
             when /\Ay\z/i then :force
-            else force_file_collision?(destination, src, dst, file_options, &block)
+            else
+              $stdout.puts <<-HELP.gsub(/^              /, '')
+              Y - yes, overwrite
+              n - no, do not overwrite
+              a - all, overwrite this and all others
+              i - ignore, skip any conflicts
+              q - quit, abort
+              d - diff, show the differences between the old and the new
+              h - help, show this help
+              HELP
+              raise 'retry'
           end
         rescue
           retry
