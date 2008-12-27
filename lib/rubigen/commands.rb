@@ -96,28 +96,28 @@ module RubiGen
       private
         # Ask the user interactively whether to force collision.
         def force_file_collision?(destination, src, dst, file_options = {}, &block)
-          $stdout.print "overwrite #{destination}? [Ynaiqd] "
-          $stdout.flush
-          case $stdin.gets
-            when /d/i
+          stdout.print "overwrite #{destination}? [Ynaiqd] "
+          stdout.flush
+          case $stdin.gets.chomp
+            when /\Ad\z/i
               Tempfile.open(File.basename(destination), File.dirname(dst)) do |temp|
                 temp.write render_file(src, file_options, &block)
                 temp.rewind
-                $stdout.stdout.puts `#{diff_cmd} #{dst} #{temp.path}`
+                stdout.puts `#{diff_cmd} #{dst} #{temp.path}`
               end
               stdout.puts "retrying"
               raise 'retry diff'
-            when /a/i
-              $stdout.stdout.puts "forcing #{spec.name}"
+            when /\Aa\z/i
+              stdout.puts "forcing #{spec.name}"
               options[:collision] = :force
-            when /i/i
-              $stdout.stdout.puts "ignoring #{spec.name}"
+            when /\Ai\z/i
+              stdout.puts "ignoring #{spec.name}"
               options[:collision] = :skip
-            when /q/i
-              $stdout.stdout.puts "aborting #{spec.name}"
+            when /\Aq\z/i
+              stdout.puts "aborting #{spec.name}"
               raise SystemExit
-            when /n/i then :skip
-            when /y/i then :force
+            when /\An\z/i then :skip
+            when /\Ay\z/i then :force
             else force_file_collision?(destination, src, dst, file_options, &block)
           end
         rescue
