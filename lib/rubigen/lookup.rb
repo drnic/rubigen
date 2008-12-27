@@ -54,7 +54,7 @@ module RubiGen
 
     # Convenience method to instantiate another generator.
     def instance(generator_name, args, runtime_options = {})
-      self.class.instance(generator_name, args, runtime_options)
+      self.class.active.instance(generator_name, args, runtime_options)
     end
 
     module ClassMethods
@@ -162,7 +162,7 @@ module RubiGen
 
       # Convenience method to lookup and instantiate a generator.
       def instance(generator_name, args = [], runtime_options = {})
-        lookup(generator_name).klass.new(args, full_options(runtime_options))
+        active.lookup(generator_name).klass.new(args, full_options(runtime_options))
       end
 
       private
