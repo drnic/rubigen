@@ -1,4 +1,4 @@
-== 1.5.0 2008-12-27
+== 1.5.0 2008-12-27 NOT RELEASED
 
 * Preparation for integration back into Rails
 * --git/-g option for generated files to be added via git commands

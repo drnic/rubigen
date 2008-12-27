@@ -8,11 +8,9 @@ $hoe = Hoe.new('rubigen', RubiGen::VERSION) do |p|
   p.developer('Jeremy Kemper', 'jeremy@bitsweat.net')
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.extra_deps         = [
-    ['activesupport','>= 2.2.2'],
+    ['activesupport','>= 2.2.2']
   ]
-  p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
-  ]
+  p.extra_dev_deps = [['newgem', ">= #{::Newgem::VERSION}"]]
   
   p.clean_globs |= %w[**/.DS_Store tmp *.log]
   path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
