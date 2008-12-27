@@ -202,8 +202,6 @@ module RubiGen
         case filter
         when :visible
           mem << spec.name if spec.visible?
-        else
-          usage_message
         end
         mem
       end.sort
