@@ -16,7 +16,7 @@ How to create a Generator (Component Generator)
 7. Update your Manifest.txt with the new files  (if you are using Hoe)
 8. Build and install your RubyGem locally. Run: rake install_gem
 9. Go to a work area whose script/generate for your scope (e.g. go to the root folder
-   of a Merb application to use a 'merb' scoped generator.
+   of a Rails application to use a 'rails' scoped generator.
 10. Run "script/generate" and your new generator should appear in the list of available generators.
 11. Run "script/generate mygen" to see the options and usage information for your generator.
 12. Run "script/generator mygen arguments" to execute the generator.

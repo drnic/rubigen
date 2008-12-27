@@ -44,8 +44,6 @@ class ComponentGeneratorGenerator < RubiGen::Base
     case (generator_type.to_sym rescue nil)
     when :rails
       "Rails::Generator::NamedBase"
-    when :merb
-      "Merb::GeneratorBase"
     else
       "RubiGen::Base"
     end
@@ -55,8 +53,6 @@ class ComponentGeneratorGenerator < RubiGen::Base
     case (generator_type.to_sym rescue nil)
     when :rails
       ["rails_generator"]
-    when :merb
-      ["merb-core", "merb-gen"]
     else
       []
     end

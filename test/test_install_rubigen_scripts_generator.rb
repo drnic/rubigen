@@ -26,7 +26,7 @@ class TestInstallRubigenScriptsGenerator < Test::Unit::TestCase
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
   
   def test_install_rubigen_scripts_should_create_script_generate
-    run_generator('install_rubigen_scripts', [APP_ROOT] + %w(rubygems merb), sources)
+    run_generator('install_rubigen_scripts', [APP_ROOT] + %w(rubygems foobar), sources)
     assert_directory_exists "script"
     assert_generated_file   "script/generate"
     assert_generated_file   "script/destroy"

@@ -15,10 +15,10 @@ How to create a Generator (Application Generator)
 6. If your application generator uses other generators (called 'dependencies')
     e.g. (m.dependency "generator-from-rubygems", [arg1, arg2], options)
    then you must add this generators' scope into the executable bin/myapp.
-   For example, if you wanted to use a rubygems and/or merb generator, then 
+   For example, if you wanted to use a rubygems and/or rails generator, then 
    replace the use_application_sources! call in bin/myapp:
 
-      RubiGen::Base.use_application_sources! :rubygems, :merb
+      RubiGen::Base.use_application_sources! :rubygems, :rails
 
    Without this, RubiGen will not be able to find your dependent generators.
 7. Update your Manifest.txt with the new files (rake manifest:refresh)

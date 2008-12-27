@@ -1,5 +1,5 @@
 = TODO
 
-* Labels for displays based on scope (common, merb, newgem), not rubygems, builtin, etc. Perhaps use one PathSource per scope.
+* Labels for displays based on scope (common, rails, newgem), not rubygems, builtin, etc. Perhaps use one PathSource per scope.
   See RubiGen::Scripts::Base#usage_message
-* Local generators (~/.rubigen) can be scoped (~/.rubigen/merb_generators)
+* Local generators (~/.rubigen) can be scoped (~/.rubigen/rails_generators)

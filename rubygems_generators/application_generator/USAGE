@@ -14,10 +14,10 @@ How to create an Application Generator
 6. Run unit tests.
 7. If your application generator uses other generators (m.dependency "gen-name", [arg1, arg2], :option1 => 'value')
    then you must add this into the generated bin/foobar file.
-   For example, if you wanted to use a rubygems and/or merb generator, then replace the use_application_sources! 
+   For example, if you wanted to use a rubygems and/or rails generator, then replace the use_application_sources! 
    call in bin/foobar:
  
-      RubiGen::Base.use_application_sources! :rubygems, :merb
+      RubiGen::Base.use_application_sources! :rubygems, :rails
  
    Without this, RubiGen will not be able to find your dependent generators.
 8. Update your Manifest.txt with the new files (if you are using Hoe; using newgem? it uses Hoe; so you need to do this)
