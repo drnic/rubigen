@@ -57,7 +57,6 @@ lib/rubigen/scripts/generate.rb
 lib/rubigen/scripts/update.rb
 lib/rubigen/simple_logger.rb
 lib/rubigen/spec.rb
-rubigen.gemspec
 rubygems_generators/application_generator/USAGE
 rubygems_generators/application_generator/application_generator_generator.rb
 rubygems_generators/application_generator/templates/bin

@@ -6,6 +6,8 @@
 * bumped activesupport requirement to 2.2.2
 * upgraded internal files to support latest newgem (removed config/ folder, moved config to Rakefile)
 * support for RAILS_ROOT as a destination root
+* removed references to Merb which now has its own generator system; can access any merb
+  generators via `rubigen` helper app
 
 == 1.4.0 2008-12-11
 
