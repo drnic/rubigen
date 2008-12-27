@@ -8,6 +8,7 @@ Feature: Generators offer help/usage details
     When run local executable 'rubigen rubygems' with arguments ''
     Then output does match /application_generator/
     And output does match /component_generator/
+    And output does not match /migration/ # from rails scope
   
 
   

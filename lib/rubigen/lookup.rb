@@ -199,7 +199,6 @@ module RubiGen
     # Return a convenient sorted list of all generator names.
     def names(filter = nil)
       inject([]) do |mem, spec|
-        p [spec, filter]
         case filter
         when :visible
           mem << spec.name if spec.visible?
