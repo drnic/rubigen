@@ -14,3 +14,5 @@ end
 FileUtils.mkdir_p(APP_ROOT)
 
 require 'rubigen/helpers/generator_test_helper'
+
+FileUtils.rm_rf(File.dirname(__FILE__) + "/tmp") # seem to be issues on runcoderun with a test/tmp/... folder still
