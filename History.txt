@@ -4,6 +4,7 @@
 * --git/-g option for generated files to be added via git commands
 * after_generate hook for generators (used as rails' templates mechanism)
 * bumped activesupport requirement to 2.2.2
+* upgraded internal files to support latest newgem (removed config/ folder, moved config to Rakefile)
 
 == 1.4.0 2008-12-11
 

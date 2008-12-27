@@ -216,7 +216,7 @@ module RubiGen
         # Determine full paths for source and destination files.
         source              = source_path(relative_source)
         destination         = destination_path(relative_destination)
-        destination_exists  = File.exists?(destination)
+        destination_exists  = File.exist?(destination)
 
         # If source and destination are identical then we're done.
         if destination_exists and identical?(source, destination, &block)
@@ -264,7 +264,7 @@ module RubiGen
           FileUtils.chmod(file_options[:chmod], destination)
         end
 
-        # Optionally add file to subversion
+        # Optionally add file to subversion or git
         system("svn add #{destination}") if options[:svn]
       end
 
@@ -282,6 +282,7 @@ module RubiGen
         files.each do |file_name|
           file "#{template_path}#{file_name}", "#{path}#{file_name}", options
         end
+        system("git add -v #{relative_destination}") if options[:git]
       end
 
       # Checks if the source and the destination file are identical. If
@@ -295,7 +296,7 @@ module RubiGen
       end
 
       # Generate a file using an ERuby template.
-      # Looks up and evalutes a template by name and writes the result.
+      # Looks up and evaluates a template by name and writes the result.
       #
       # The ERB template uses explicit trim mode to best control the
       # proliferation of whitespace in generated code.  <%- trims leading
@@ -335,22 +336,24 @@ module RubiGen
       end
 
       # Create a directory including any missing parent directories.
-      # Always directories which exist.
+      # Always skips directories which exist.
       def directory(relative_path)
         path = destination_path(relative_path)
-        if File.exists?(path)
+        if File.exist?(path)
           logger.exists relative_path
         else
           logger.create relative_path
           unless options[:pretend]
             FileUtils.mkdir_p(path)
+            # git doesn't require adding the paths, adding the files later will
+            # automatically do a path add.
 
             # Subversion doesn't do path adds, so we need to add
             # each directory individually.
             # So stack up the directory tree and add the paths to
             # subversion in order without recursion.
             if options[:svn]
-              stack=[relative_path]
+              stack = [relative_path]
               until File.dirname(stack.last) == stack.last # dirname('.') == '.'
                 stack.push File.dirname(stack.last)
               end
@@ -369,45 +372,6 @@ module RubiGen
           logger.readme relative_source
           stdout.puts File.read(source_path(relative_source)) unless options[:pretend]
         end
-      end
-
-      # Display a README.
-      def write_manifest(relative_destination)
-        files = ([relative_destination] + Dir["#{destination_root}/**/*"])
-        files.reject! { |file| File.directory?(file) }
-        files.map! { |path| path.sub("#{destination_root}/","") }
-        files = files.uniq.sort
-
-
-        destination         = destination_path(relative_destination)
-        destination_exists  = File.exists?(destination)
-
-        # Check for and resolve file collisions.
-        if destination_exists
-          # Always recreate the Manifest (perhaps we need to give the option... like normal files)
-          choice = :force
-          logger.force(relative_destination)
-
-        # File doesn't exist so log its unbesmirched creation.
-        else
-          logger.create relative_destination
-        end
-
-        # If we're pretending, back off now.
-        return if options[:pretend]
-
-        # Write destination file with optional shebang.  Yield for content
-        # if block given so templaters may render the source file.  If a
-        # shebang is requested, replace the existing shebang or insert a
-        # new one.
-        File.open(destination, 'wb') do |dest|
-          dest.write files.join("\n")
-          dest.write "\n"
-        end
-
-        # Optionally add file to subversion
-        system("svn add #{destination}") if options[:svn]
-
       end
 
       # When creating a migration, it knows to find the first available file in db/migrate and use the migration.rb template.
@@ -452,17 +416,19 @@ module RubiGen
         # Thanks to Florian Gross (flgr).
         def raise_class_collision(class_name)
           message = <<-end_message
-The name '#{class_name}' is reserved.
+The name '#{class_name}' is either already used in your application or reserved.
 Please choose an alternative and run this generator again.
 end_message
           if suggest = find_synonyms(class_name)
-            message << "\n  Suggestions:  \n\n"
-            message << suggest.join("\n")
+            if suggest.any?
+              message << "\n  Suggestions:  \n\n"
+              message << suggest.join("\n")
+            end
           end
           raise UsageError, message
         end
 
-        SYNONYM_LOOKUP_URI = "http://wordnet.princeton.edu/cgi-bin/webwn2.0?stage=2&word=%s&posnumber=1&searchtypenumber=2&senses=&showglosses=1"
+        SYNONYM_LOOKUP_URI = "http://wordnet.princeton.edu/perl/webwn?s=%s"
 
         # Look up synonyms on WordNet.  Thanks to Florian Gross (flgr).
         def find_synonyms(word)
@@ -470,8 +436,8 @@ end_message
           require 'timeout'
           timeout(5) do
             open(SYNONYM_LOOKUP_URI % word) do |stream|
-              data = stream.read.gsub("&nbsp;", " ").gsub("<BR>", "")
-              data.scan(/^Sense \d+\n.+?\n\n/m)
+              # Grab words linked to dictionary entries as possible synonyms
+              data = stream.read.gsub("&nbsp;", " ").scan(/<a href="webwn.*?">([\w ]*?)<\/a>/s).uniq
             end
           end
         rescue Exception

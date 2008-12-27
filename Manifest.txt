@@ -32,7 +32,6 @@ app_generators/ruby_app/templates/lib/module.rb
 app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
 bin/ruby_app
-config/hoe.rb
 features/development.feature
 features/steps/common.rb
 features/steps/env.rb
@@ -54,6 +53,7 @@ lib/rubigen/scripts/generate.rb
 lib/rubigen/scripts/update.rb
 lib/rubigen/simple_logger.rb
 lib/rubigen/spec.rb
+rubigen.gemspec
 rubygems_generators/application_generator/USAGE
 rubygems_generators/application_generator/application_generator_generator.rb
 rubygems_generators/application_generator/templates/bin
