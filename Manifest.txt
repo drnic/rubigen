@@ -78,7 +78,6 @@ script/console
 script/destroy
 script/generate
 script/txt2html
-setup.rb
 test/.test-result/TestLookup/test_alternate_scoped_gem_path/passed
 test/.test-result/TestLookup/test_lookup_component/passed
 test/.test-result/TestLookup/test_lookup_unknown_component/passed
@@ -99,10 +98,6 @@ test/test_helper.rb
 test/test_install_rubigen_scripts_generator.rb
 test/test_lookup.rb
 test/test_rubigen_cli.rb
-test/tmp/myproject/scope_generators/name/USAGE
-test/tmp/myproject/scope_generators/name/name_generator.rb
-test/tmp/myproject/test/test_generator_helper.rb
-test/tmp/myproject/test/test_name_generator.rb
 test_unit_generators/test_unit/USAGE
 test_unit_generators/test_unit/templates/test.rb
 test_unit_generators/test_unit/test_unit_generator.rb

@@ -35,7 +35,7 @@ require File.dirname(__FILE__) + '/generated_attribute'
 # directory.
 #
 # The filenames of the templates don't matter, but choose something that
-# will be self-explatatory since you will be referencing these in the 
+# will be self-explanatory since you will be referencing these in the 
 # +manifest+ method inside your generator subclass.
 #
 # 
@@ -102,6 +102,8 @@ module RubiGen
         @destination_root = options[:destination]
       elsif defined? ::APP_ROOT
         @destination_root = ::APP_ROOT
+      elsif defined? ::RAILS_ROOT
+        @destination_root = ::RAILS_ROOT
       end
 
       # Silence the logger if requested.
