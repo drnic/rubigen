@@ -11,9 +11,10 @@ module Rubigen
     def execute(stdout, arguments=[])
       @stdout = stdout
       main_usage and return unless scope = arguments.shift
-
+      scopes = scope.split(",")
+      
       require 'rubigen/scripts/generate'
-      RubiGen::Base.use_component_sources!([scope.to_sym])
+      RubiGen::Base.use_component_sources!(scopes.map(&:to_sym))
       RubiGen::Scripts::Generate.new.run(arguments, :stdout => stdout, :no_exit => true)
     end
     

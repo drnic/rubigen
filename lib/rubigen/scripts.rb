@@ -50,7 +50,7 @@ module RubiGen
             label = source.label.to_s.capitalize
             pair = mem.assoc(label)
             mem << (pair = [label, []]) if pair.nil?
-            pair[1] |= source.names
+            pair[1] |= source.names(:visible)
             mem
           end.each do |label, names|
             usage << "  #{label}: #{names.join(', ')}\n" unless names.empty?

@@ -21,6 +21,25 @@ class TestRubigenCli < Test::Unit::TestCase
       assert_match(/component_generator/, stdout)
     end
   end
+
+  context "run executable with multiple scopes 'rubygems' and 'something_else'" do
+    setup do
+      # rubigen rubygems,something_else a_generator
+      Rubigen::CLI.execute(@stdout_io = StringIO.new, ['rubygems,something_else'])
+      @stdout_io.rewind
+      @stdout = @stdout_io.read
+    end
+
+    should "display help" do
+      assert_match(/General Options/, stdout)
+    end
+    
+    should "display installed generators for 'rubygems,something_else'" do
+      assert_match(/Installed Generators/, stdout)
+      assert_match(/application_generator/, stdout)
+      assert_match(/component_generator/, stdout)
+    end
+  end
   
   context "run executable without any arguments" do
     setup do
