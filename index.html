@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+      rubigen
+  </title>
+  <script src="javascripts/rounded_corners_lite.inc.js" type="text/javascript"></script>
+<style>
+</style>
+  <script type="text/javascript">
+    window.onload = function() {
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+      var versionBox = new curvyCorners(settings, document.getElementById("version"));
+      versionBox.applyCornersToAll();
+
+      var twitterBox = new curvyCorners(settings, document.getElementById("twitter_search"));
+      twitterBox.applyCornersToAll();
+    }
+  </script>
+</head>
+<body>
+<div id="main">
+    <h1>rubigen</h1>
+    <div class="sidebar">
+      <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/rubigen"; return false'>
+        <p>Get Version</p>
+        <a href="http://rubyforge.org/projects/rubigen" class="numbers">1.5.1</a>
+      </div>
+      
+      <div id="twitter_search">
+        <h3>Heard on twitter ('rubigen')...</h3>
+        <!-- HELP FILE -  http://twitterwidget.jazzychad.com/tw/ -->
+        <script language           = "javascript">
+        	var jtw_search            = 'rubigen';
+        	var jtw_widget_background = 'd77';
+        	var jtw_widget_border     = '0';
+        	var jtw_tweet_textcolor   = 'fff';
+          var jtw_tweet_background  = '000';
+          var jtw_tweet_border      = '0px';
+        </script>
+        <script src="http://twitterwidget.jazzychad.com/tw/searchwidget.js" type="text/javascript"></script>
+      </div>
+      
+    </div>
+    <h1>Ruby Generator Framework</h1>
+<h2>What</h2>
+<p>A framework to allow Ruby applications to generate file/folder stubs (like the <code>rails</code> command does for Ruby on Rails, and the &#8216;script/generate&#8217; command within a Rails application during development).</p>
+<p>The RubyConf 2007 presentation is now <a href="http://rubyconf2007.confreaks.com/d3t1p1_rubigen.html">online</a> together with the theme from the A-Team.</p>
+<h2>Background</h2>
+<p>RubiGen is originally extracted from Ruby on Rails (specifically the rails_generator from its railties gem).</p>
+<p>The rails_generator was hardcoded with Rails-specific dependencies (<code>RAILS_ROOT</code>), Rails generators (&#8216;app&#8217; = Rails application; &#8216;model&#8217; = Rails model+tests+migration), and generally assumed it was the only generator framework within the Ruby world (it was). So, any RubyGem whose name ended with &#8216;_generator&#8217; was assumed to be a generator for a Rails application.</p>
+<p>But if you are developing an Adhearsion application, then you may want a different set of generators.<br />
+If you are developing a RubyGem, then you will want a different set of generators.</p>
+<p>RubiGen exists to give different development environments their own generator framework.</p>
+<h2>Installing</h2>
+<p>RubiGen is only required at development time, and normally isn&#8217;t required at deployment time (unless your application uses it to generate files etc for its users).</p>
+<p>On your development machine:</p>
+<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">rubigen</span></pre></p>
+<h2>Usage</h2>
+<p>RubiGen will be normally integrated into another RubyGem, such as <code>newgem</code> or <code>rails</code> or <code>camping</code>, rather than be used on its own.</p>
+<p>These frameworks might use RubiGen for two reasons:</p>
+<ol>
+	<li>To generate an initial stub for developers, e.g. <code>rails</code> generated a stub to write a Rails application. <code>newgem</code> generates a stub to write a RubyGem. <br/><br />
+  <span class="caps">BTW</span> &#8211; RubiGen has a builtin application <code>ruby_app</code> which generates a bare-bones Ruby application stub (lib, test, and script folders, plus a Rakefile, and a script/generate script)</li>
+	<li>To generate components within their development areas, e.g. Rails had its <code>script/generate</code> script within each Rails application, which hooked back into the rails_generator to lookup and execute generators.</li>
+</ol>
+<p>So, there are two steps to integrating RubiGen into your framework:</p>
+<ol>
+	<li>Use it to generate an initial stub for the developers of your framework. This would create the folders <br />
+   (<code>lib/app</code>, <code>test</code>, <code>script</code>, <code>doc</code>, <code>log</code>, etc) and starting files (<code>Rakefile</code>, <br />
+   <code>README.txt</code>, <code>test/test_helper.rb</code> etc). Importantly, it would generate a <code>script/generate</code> file.<br />
+   The <code>script/generate</code> file (example below) will allow developers of your framework to <br />
+   generate components/extensions within the framework. <br /><br />
+   RubiGen allows you to restrict which generators are available. For example, within<br />
+   RubyGem development environment (as generated by <code>newgem</code>), the <code>script/generator</code><br />
+   only shows <code>rubygem</code>-related generators. Rails could restrict <code>script/generator</code><br />
+   to only show Rails related generators</li>
+	<li>Your framework RubyGem (e.g. <code>newgem</code> or <code>rails</code> RubyGems) needs to add <code>rubigen</code> as a <br />
+   dependency, so that users of your RubyGem can access the generator framework.</li>
+</ol>
+<h1>Creating generators</h1>
+<p>There are two types of generators:</p>
+<ol>
+	<li>Application Generators &#8211; used by developers of your framework to get started. <br />
+   Generally, you will create one Application Generator for your framework.<br />
+   It generates a base stub (such as the <code>rails</code> stub for new Rails applications)<br />
+   for your framework users.</li>
+	<li>Component Generators &#8211; used by developers to extend their application.<br />
+   You may include 1+ built-in generators with your framework.<br />
+   Developers can also write generators for your framework, and like Rails&#8217; generator<br />
+   install them in various places and have access to their via RubiGen.</li>
+</ol>
+<h2>Creating an Application Generator for your Framework</h2>
+<h3>Easy way</h3>
+<p><a href="http://newgem.rubyforge.org/">newgem</a> (v0.13.0+) can generate an Application Generator<br />
+for a RubyGem.</p>
+<ol>
+	<li>Create new RubyGem: <code>newgem foobar</code></li>
+	<li>Create generator: <code>script/generator application_generator foobar</code></li>
+	<li>Update tests + generator</li>
+	<li>Install</li>
+	<li>Run with: foobar</li>
+</ol>
+<p>For more documentation, run <code>script/generator application_generator</code></p>
+<h3><span class="caps">DIY</span></h3>
+<p>Without RubiGen, to give your users a head start and create a stub for them, you will <br />
+copiously use <code>mkdir_p</code> and <code>File.open</code>. Your script will either be primitive (only<br />
+create the bare folders and very few files) or it will be very long and unreadable<br />
+(ok, perhaps I&#8217;m just talking about the <code>newgem</code> script, which I am dubiously responsible<br />
+for&#8230; :P).</p>
+<p>With RubiGen, you can create stubs using powerful, yet simple, syntax. Templates are<br />
+extracted into a <code>templates</code> folder, and activating the generator from a script requires<br />
+only a few lines of code.</p>
+<p>These are the <code>newgem</code> files related to its Application Generator.</p>
+bin/
+bin/newgem        # Appliction Generator script; Usage: newgem gemname [options]
+app_generators/
+app_generators/newgem/
+app_generators/newgem/newgem_generator.rb
+app_generators/newgem/<span class="caps">USAGE</span>
+app_generators/newgem/templates/
+app_generators/newgem/templates/app.rb
+app_generators/newgem/templates/History.txt
+app_generators/newgem/templates/&#8230; lots and lots of templates
+<p>The <code>bin/newgem</code> script is very simple, and looks like:</p>
+<p><pre class='syntax'>
+<span class="ident">require</span> <span class="punct">'</span><span class="string">rubygems</span><span class="punct">'</span>
+<span class="ident">require</span> <span class="punct">'</span><span class="string">rubigen</span><span class="punct">'</span>
+
+<span class="keyword">if</span> <span class="punct">%w(</span><span class="string">-v --version</span><span class="punct">).</span><span class="ident">include?</span> <span class="constant">ARGV</span><span class="punct">.</span><span class="ident">first</span>
+  <span class="ident">require</span> <span class="punct">'</span><span class="string">newgem/version</span><span class="punct">'</span>
+  <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string"><span class="expr">#{File.basename($0)}</span> <span class="expr">#{Newgem::VERSION}</span></span><span class="punct">&quot;</span>
+  <span class="ident">exit</span><span class="punct">(</span><span class="number">0</span><span class="punct">)</span>
+<span class="keyword">end</span>
+
+<span class="ident">require</span> <span class="punct">'</span><span class="string">rubigen/scripts/generate</span><span class="punct">'</span>
+<span class="constant">RubiGen</span><span class="punct">::</span><span class="constant">Base</span><span class="punct">.</span><span class="ident">use_application_sources!</span>
+<span class="constant">RubiGen</span><span class="punct">::</span><span class="constant">Scripts</span><span class="punct">::</span><span class="constant">Generate</span><span class="punct">.</span><span class="ident">new</span><span class="punct">.</span><span class="ident">run</span><span class="punct">(</span><span class="constant">ARGV</span><span class="punct">,</span> <span class="symbol">:generator</span> <span class="punct">=&gt;</span> <span class="punct">'</span><span class="string">newgem</span><span class="punct">')</span>
+</pre></p>
+<p>You can copy and paste this for your own generator script, and place it in your RubyGem&#8217;s <code>bin</code> folder.<br />
+Change <code>newgem</code> to your RubyGem&#8217;s name in the script above (and in all the folders listed above too)</p>
+<p><span class="caps">NOTE</span>: If you leave <code>newgem</code> there, then it will execute the <code>newgem_generator.rb</code> generator; <br />
+as the generators are loaded from all RubyGem&#8217;s having <code>/app_generators</code> folders.</p>
+<p>So, for your RubyGem, you need to keep the <code>/app_generators</code> folder (as you are creating an <br />
+Application Generator, not a Component Generator), but change <code>newgem</code> to <code>your gem name</code> in<br />
+all the subfolders and files. <span class="caps">ESPECIALLY</span> <code>newgem_generator.rb</code> &#8594; <code>yourgem_generator.rb</code>,<br />
+as this is how the generator is discovered (via <code>RubiGen::Base.use_application_sources!</code>).</p>
+<p>All the generator work is performed within <code>yourgem_generator.rb</code>. A stub for it will be:</p>
+<p><pre class='syntax'>
+<span class="ident">require</span> <span class="punct">'</span><span class="string">rbconfig</span><span class="punct">'</span>
+
+<span class="keyword">class </span><span class="class">YourgemGenerator</span> <span class="punct">&lt;</span> <span class="constant">RubiGen</span><span class="punct">::</span><span class="constant">Base</span>
+  <span class="constant">DEFAULT_SHEBANG</span> <span class="punct">=</span> <span class="constant">File</span><span class="punct">.</span><span class="ident">join</span><span class="punct">(</span><span class="constant">Config</span><span class="punct">::</span><span class="constant">CONFIG</span><span class="punct">['</span><span class="string">bindir</span><span class="punct">'],</span>
+                              <span class="constant">Config</span><span class="punct">::</span><span class="constant">CONFIG</span><span class="punct">['</span><span class="string">ruby_install_name</span><span class="punct">'])</span>
+                              
+  <span class="ident">default_options</span>   <span class="symbol">:shebang</span> <span class="punct">=&gt;</span> <span class="constant">DEFAULT_SHEBANG</span><span class="punct">,</span>
+                    <span class="symbol">:an_option</span> <span class="punct">=&gt;</span> <span class="punct">'</span><span class="string">some_default</span><span class="punct">'</span>
+  
+  <span class="ident">attr_reader</span> <span class="symbol">:app_name</span><span class="punct">,</span> <span class="symbol">:module_name</span>
+  
+  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span><span class="ident">runtime_args</span><span class="punct">,</span> <span class="ident">runtime_options</span> <span class="punct">=</span> <span class="punct">{})</span>
+    <span class="keyword">super</span>
+    <span class="ident">usage</span> <span class="keyword">if</span> <span class="ident">args</span><span class="punct">.</span><span class="ident">empty?</span>
+    <span class="attribute">@destination_root</span> <span class="punct">=</span> <span class="ident">args</span><span class="punct">.</span><span class="ident">shift</span>
+    <span class="attribute">@app_name</span>     <span class="punct">=</span> <span class="constant">File</span><span class="punct">.</span><span class="ident">basename</span><span class="punct">(</span><span class="constant">File</span><span class="punct">.</span><span class="ident">expand_path</span><span class="punct">(</span><span class="attribute">@destination_root</span><span class="punct">))</span>
+    <span class="attribute">@module_name</span>  <span class="punct">=</span> <span class="ident">app_name</span><span class="punct">.</span><span class="ident">camelize</span>
+    <span class="ident">extract_options</span>
+  <span class="keyword">end</span>
+    
+  <span class="keyword">def </span><span class="method">manifest</span>
+    <span class="comment"># Use /usr/bin/env if no special shebang was specified</span>
+    <span class="ident">script_options</span>     <span class="punct">=</span> <span class="punct">{</span> <span class="symbol">:chmod</span> <span class="punct">=&gt;</span> <span class="number">0755</span><span class="punct">,</span> <span class="symbol">:shebang</span> <span class="punct">=&gt;</span> <span class="ident">options</span><span class="punct">[</span><span class="symbol">:shebang</span><span class="punct">]</span> <span class="punct">==</span> <span class="constant">DEFAULT_SHEBANG</span> <span class="punct">?</span> <span class="constant">nil</span> <span class="punct">:</span> <span class="ident">options</span><span class="punct">[</span><span class="symbol">:shebang</span><span class="punct">]</span> <span class="punct">}</span>
+    <span class="ident">windows</span>            <span class="punct">=</span> <span class="punct">(</span><span class="constant">RUBY_PLATFORM</span> <span class="punct">=~</span> <span class="punct">/</span><span class="regex">dos|win32|cygwin</span><span class="punct">/</span><span class="ident">i</span><span class="punct">)</span> <span class="punct">||</span> <span class="punct">(</span><span class="constant">RUBY_PLATFORM</span> <span class="punct">=~</span> <span class="punct">/</span><span class="regex">(:?mswin|mingw)</span><span class="punct">/)</span>
+    
+    <span class="ident">record</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">m</span><span class="punct">|</span>
+      <span class="comment"># Root directory and all subdirectories.</span>
+      <span class="ident">m</span><span class="punct">.</span><span class="ident">directory</span> <span class="punct">'</span><span class="string"></span><span class="punct">'</span>
+      <span class="constant">BASEDIRS</span><span class="punct">.</span><span class="ident">each</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">path</span><span class="punct">|</span> <span class="ident">m</span><span class="punct">.</span><span class="ident">directory</span> <span class="ident">path</span> <span class="punct">}</span>
+      
+      <span class="comment"># Root</span>
+      <span class="ident">m</span><span class="punct">.</span><span class="ident">template_copy_each</span> <span class="punct">%w(</span><span class="string"> Rakefile </span><span class="punct">)</span>
+      <span class="ident">m</span><span class="punct">.</span><span class="ident">file_copy_each</span>     <span class="punct">%w(</span><span class="string"> README.txt </span><span class="punct">)</span>
+
+      <span class="comment"># Test helper</span>
+      <span class="ident">m</span><span class="punct">.</span><span class="ident">template</span>   <span class="punct">&quot;</span><span class="string">test_helper.rb</span><span class="punct">&quot;,</span>        <span class="punct">&quot;</span><span class="string">test/test_helper.rb</span><span class="punct">&quot;</span>
+
+      <span class="comment"># Scripts</span>
+      <span class="punct">%w(</span><span class="string"> generate </span><span class="punct">).</span><span class="ident">each</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">file</span><span class="punct">|</span>
+        <span class="ident">m</span><span class="punct">.</span><span class="ident">template</span> <span class="punct">&quot;</span><span class="string">script/<span class="expr">#{file}</span></span><span class="punct">&quot;,</span>        <span class="punct">&quot;</span><span class="string">script/<span class="expr">#{file}</span></span><span class="punct">&quot;,</span> <span class="ident">script_options</span>
+        <span class="ident">m</span><span class="punct">.</span><span class="ident">template</span> <span class="punct">&quot;</span><span class="string">script/win_script.cmd</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">script/<span class="expr">#{file}</span>.cmd</span><span class="punct">&quot;,</span> 
+          <span class="symbol">:assigns</span> <span class="punct">=&gt;</span> <span class="punct">{</span> <span class="symbol">:filename</span> <span class="punct">=&gt;</span> <span class="ident">file</span> <span class="punct">}</span> <span class="keyword">if</span> <span class="ident">windows</span>
+      <span class="keyword">end</span>
+   
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+
+  <span class="ident">protected</span>
+    <span class="keyword">def </span><span class="method">banner</span>
+      <span class="punct">&lt;&lt;-</span><span class="constant">EOS</span><span class="string">
+Create a stub for <span class="expr">#{File.basename $0}</span> to get started.
+
+Usage: <span class="expr">#{File.basename $0}</span> /path/to/your/app [options]&quot;
+</span><span class="constant">EOS</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">def </span><span class="method">add_options!</span><span class="punct">(</span><span class="ident">opts</span><span class="punct">)</span>
+      <span class="ident">opts</span><span class="punct">.</span><span class="ident">separator</span> <span class="punct">'</span><span class="string"></span><span class="punct">'</span>
+      <span class="ident">opts</span><span class="punct">.</span><span class="ident">separator</span> <span class="punct">&quot;</span><span class="string"><span class="expr">#{File.basename $0}</span> options:</span><span class="punct">&quot;</span>
+      <span class="ident">opts</span><span class="punct">.</span><span class="ident">on</span><span class="punct">(&quot;</span><span class="string">-v</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">--version</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">Show the <span class="expr">#{File.basename($0)}</span> version number and quit.</span><span class="punct">&quot;)</span>
+    <span class="keyword">end</span>
+
+  <span class="comment"># Installation skeleton.  Intermediate directories are automatically</span>
+  <span class="comment"># created so don't sweat their absence here.</span>
+  <span class="constant">BASEDIRS</span> <span class="punct">=</span> <span class="punct">%w(</span><span class="string">
+    doc
+    lib
+    log
+    script
+    test
+    tmp
+  </span><span class="punct">)</span>
+<span class="keyword">end</span>
+</pre></p>
+<p>Easy peasy.</p>
+<h2>Creating a Component Generator for your Framework</h2>
+<p>You can include Component Generators in RubyGems, and they will be automatially picked up<br />
+by your framework&#8217;s <code>script/generate</code> script.</p>
+<h3>Easy way</h3>
+<p>Use <a href="http://newgem.rubyforge.org/">newgem</a>, (v0.13.0+), and run:</p>
+<pre>
+script/generate component_generator
+</pre>
+<p>and follow the instructions.</p>
+<h2>Live at RubyConf 2007</h2>
+<p>RubiGen had the 9am, Sunday timeslot at RubyConf 2007 and was <a href="http://rubyconf2007.confreaks.com/d3t1p1_rubigen.html">recorded for your viewing pleasure</a>.</p>
+<h2>Forum</h2>
+<p><a href="http://groups.google.com/group/rubigen">http://groups.google.com/group/rubigen</a></p>
+<h2>How to submit patches</h2>
+<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a> and for section <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups">8b: Submit patch to Google Groups</a>, use the Google Group above.</p>
+<p>The source for this project is available via git. You can <a href="http://github.com/drnic/rubigen/tree/master">browse and/or fork the source</a>, or to clone the project locally:<br />
+  <br />
+<pre>git clone git://github.com/drnic/rubigen.git</pre></p>
+<p>The original Subversion repository is <code>svn://rubyforge.org/var/svn/rubigen/trunk</code> for anonymous access.</p>
+<h2>Thanks go to&#8230;</h2>
+<p><a href="http://bitsweat.net/">Jeremy Kemper</a> (bitsweat) who wrote the original <a href="http://dev.rubyonrails.org">Rails Generator</a>.</p>
+<h2>License</h2>
+<p>This code is free to use under the terms of the <span class="caps">MIT</span> license.</p>
+<h2>Contact</h2>
+<p>Comments are welcome. Send an email to <a href="mailto:drnicwilliams@gmail.com">Dr Nic Williams</a> via the <a href="http://groups.google.com/group/rubigen">forum</a></p>
+    <p class="coda">
+      <a href="drnicwilliams@gmail.com">Dr Nic Williams</a>, 27th December 2008<br>
+      Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
+    </p>
+</div>
+<!-- insert site tracking codes here, like Google Urchin -->
+</body>
+</html>
