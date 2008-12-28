@@ -1,6 +1,6 @@
 = RubiGen - Ruby Generator Framework
 
-* http://rubigen.rubyforge.org
+* http://drnic.github.com/rubigen
 
 == DESCRIPTION:
 
