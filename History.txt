@@ -1,6 +1,8 @@
 == 1.5.1 2008-12-29
 
 * Return #write_manifest which was accidently removed
+* Moved website into gh-pages branch; thus moving homepage from http://rubigen.rubforge.org -> 
+  http://drnic.github.com/rubigen
 
 == 1.5.0 2008-12-27
 
