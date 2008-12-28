@@ -56,6 +56,10 @@ module RubiGen
       def readme(*args)
       end
 
+      # Does nothing for all commands except Create.
+      def write_manifest
+      end
+      
       protected
         def current_migration_number
           Dir.glob("#{RAILS_ROOT}/#{@migration_directory}/[0-9]*_*.rb").inject(0) do |max, file_path|
@@ -372,6 +376,43 @@ module RubiGen
           logger.readme relative_source
           stdout.puts File.read(source_path(relative_source)) unless options[:pretend]
         end
+      end
+
+      def write_manifest(relative_destination)
+        files = ([relative_destination] + Dir["#{destination_root}/**/*"])
+        files.reject! { |file| File.directory?(file) }
+        files.map! { |path| path.sub("#{destination_root}/","") }
+        files = files.uniq.sort
+
+
+        destination         = destination_path(relative_destination)
+        destination_exists  = File.exists?(destination)
+
+        # Check for and resolve file collisions.
+        if destination_exists
+          # Always recreate the Manifest (perhaps we need to give the option... like normal files)
+          choice = :force
+          logger.force(relative_destination)
+
+        # File doesn't exist so log its unbesmirched creation.
+        else
+          logger.create relative_destination
+        end
+
+        # If we're pretending, back off now.
+        return if options[:pretend]
+
+        # Write destination file with optional shebang.  Yield for content
+        # if block given so templaters may render the source file.  If a
+        # shebang is requested, replace the existing shebang or insert a
+        # new one.
+        File.open(destination, 'wb') do |dest|
+          dest.write files.join("\n")
+          dest.write "\n"
+        end
+
+        # Optionally add file to subversion
+        system("svn add #{destination}") if options[:svn]
       end
 
       # When creating a migration, it knows to find the first available file in db/migrate and use the migration.rb template.
