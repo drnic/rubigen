@@ -1,3 +1,7 @@
+== 1.5.2 2009-01-12
+
+* Trying to remove a circular rubigen->newgem->rubigen dependency issue
+
 == 1.5.1 2008-12-29
 
 * Return #write_manifest which was accidently removed
