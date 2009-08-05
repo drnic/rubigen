@@ -14,11 +14,14 @@ app_generators/ruby_app/templates/test/test_helper.rb.erb
 bin/install_rubigen_scripts
 bin/rubigen
 bin/ruby_app
+config/website.yml
 features/development.feature
 features/help.feature
 features/rubigen_cli.feature
-features/steps/common.rb
-features/steps/env.rb
+features/step_definitions/common_steps.rb
+features/support/common.rb
+features/support/env.rb
+features/support/matchers.rb
 generators/install_rubigen_scripts/install_rubigen_scripts_generator.rb
 generators/install_rubigen_scripts/templates/script/destroy
 generators/install_rubigen_scripts/templates/script/generate
@@ -38,6 +41,7 @@ lib/rubigen/scripts/generate.rb
 lib/rubigen/scripts/update.rb
 lib/rubigen/simple_logger.rb
 lib/rubigen/spec.rb
+rubigen.gemspec
 rubygems_generators/application_generator/USAGE
 rubygems_generators/application_generator/application_generator_generator.rb
 rubygems_generators/application_generator/templates/bin
