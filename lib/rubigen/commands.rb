@@ -124,7 +124,7 @@ module RubiGen
             when /\An\z/i then :skip
             when /\Ay\z/i then :force
             else
-              $stdout.puts <<-HELP.gsub(/^              /, '')
+              stdout.puts <<-HELP.gsub(/^              /, '')
               Y - yes, overwrite
               n - no, do not overwrite
               a - all, overwrite this and all others
