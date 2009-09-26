@@ -1,13 +1,7 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-begin
-  require 'active_support' 
-rescue LoadError
-  require 'rubygems'
-  gem 'activesupport'
-  require 'active_support' 
-end
+require 'active_support' 
 
 module RubiGen
   VERSION = '1.5.2'
