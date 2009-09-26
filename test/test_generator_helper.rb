@@ -1,6 +1,5 @@
 require File.dirname(__FILE__) + '/test_helper'
 require 'fileutils'
-require 'shoulda'
 
 # Must set before requiring generator libs.
 TMP_ROOT = File.expand_path(File.dirname(__FILE__) + "/../tmp") unless defined?(TMP_ROOT)
