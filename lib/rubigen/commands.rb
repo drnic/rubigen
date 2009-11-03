@@ -48,6 +48,10 @@ module RubiGen
         end
       end
 
+      # Cannot really do anything except for Create
+      def gsub_file(*args, &block)
+      end
+
       # Does nothing for all commands except Create.
       def class_collisions(*class_names)
       end
@@ -90,12 +94,6 @@ module RubiGen
           else
             "%.#{padding}d" % next_migration_number
           end
-        end
-
-        def gsub_file(relative_destination, regexp, *args, &block)
-          path = destination_path(relative_destination)
-          content = File.read(path).gsub(regexp, *args, &block)
-          File.open(path, 'wb') { |file| file.write(content) }
         end
 
       private
@@ -339,6 +337,13 @@ module RubiGen
         template(relative_source, relative_destination, options)
       end
 
+      def gsub_file(relative_destination, regexp, *args, &block)
+        logger.gsub_file relative_destination
+        path = destination_path(relative_destination)
+        content = File.read(path).gsub(regexp, *args, &block)
+        File.open(path, 'wb') { |file| file.write(content) }
+      end
+
       # Create a directory including any missing parent directories.
       # Always skips directories which exist.
       def directory(relative_path)
@@ -414,7 +419,7 @@ module RubiGen
         # Optionally add file to subversion
         system("svn add #{destination}") if options[:svn]
       end
-
+      
       # When creating a migration, it knows to find the first available file in db/migrate and use the migration.rb template.
       def migration_template(relative_source, relative_destination, template_options = {})
         migration_directory relative_destination
@@ -625,6 +630,10 @@ end_message
 
       def directory(relative_path)
         logger.directory "#{destination_path(relative_path)}/"
+      end
+
+      def gsub_file(*args, &block)
+        logger.gsub_file args.join(', ')
       end
 
       def readme(*args)
