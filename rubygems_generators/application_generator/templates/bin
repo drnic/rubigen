@@ -4,7 +4,7 @@ require 'rubygems'
 require 'rubigen'
 
 if %w(-v --version).include? ARGV.first
-  require '<%= name %>/version'
+  require '<%= name %>'
   puts "#{File.basename($0)} #{<%= app_model_name %>::VERSION}"
   exit(0)
 end
