@@ -1,3 +1,5 @@
+== 1.5.3 2010-02-11
+
 * Forced rubigen to use activesupport 2.3.5 (as the last < 3.0 version). It will upgrade to use 3.0.0 when it is released.
 
 
