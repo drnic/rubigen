@@ -3,6 +3,8 @@
 #  Created on 2008-12-27.
 #  Copyright (c) 2008. All rights reserved.
 
+require "rubygems"
+gem 'activesupport', '2.3.5'
 require File.expand_path(File.dirname(__FILE__) + "/../lib/rubigen")
 
 require "rubigen/cli"

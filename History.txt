@@ -1,3 +1,6 @@
+* Forced rubigen to use activesupport 2.3.5 (as the last < 3.0 version). It will upgrade to use 3.0.0 when it is released.
+
+
 == 1.5.2 2009-01-12
 
 * Trying to remove a circular rubigen->newgem->rubigen dependency issue

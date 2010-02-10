@@ -1,5 +1,5 @@
-require "rubygems"
-require "hoe"
+require 'rubygems'
+require 'hoe'
 require './lib/rubigen'
 
 Hoe.plugin :newgem
@@ -12,7 +12,7 @@ Hoe.plugin :git
 Hoe.spec 'rubigen' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Jeremy Kemper', 'jeremy@bitsweat.net'
-  extra_deps << ['activesupport','>= 2.2.2']
+  extra_deps << ['activesupport','2.3.5']
   extra_deps << ['mocha','>= 0.9.7']
   extra_deps << ['cucumber','>= 0.3.6']
   extra_deps << ['thoughtbot-shoulda','>= 2.10.2']
