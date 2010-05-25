@@ -1,3 +1,7 @@
+== 1.5.5 2010-05-25
+
+* Allow activesupport 2.3.5+
+
 == 1.5.4 2010-02-16
 
 * mocha, cucumber and shoulda are development dependencies (fixes requirement for thoughtbot-shoulda too)

@@ -10,7 +10,7 @@ end
 require 'active_support' 
 
 module RubiGen
-  VERSION = '1.5.4'
+  VERSION = '1.5.5'
 end
 
 require 'rubigen/base'
