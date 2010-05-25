@@ -3,7 +3,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 begin
   # if you are using rubygems, fix to 2.3.5
-  gem 'activesupport', '2.3.5'
+  gem 'activesupport', '~> 2.3.5'
 rescue
 end
 
