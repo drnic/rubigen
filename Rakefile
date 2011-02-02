@@ -13,9 +13,14 @@ Hoe.spec 'rubigen' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Jeremy Kemper', 'jeremy@bitsweat.net'
   extra_deps << ['activesupport','>= 2.3.5']
+  # Needed when loading active_support/all
+  extra_deps << ['i18n']
   extra_dev_deps << ['mocha','>= 0.9.8']
   extra_dev_deps << ['cucumber','>= 0.6.2']
   extra_dev_deps << ['shoulda','>= 2.10.3']
+  extra_dev_deps << ['hoe']
+  extra_dev_deps << ['hoe-git']
+  extra_dev_deps << ['newgem']
 end
 
 require 'newgem/tasks' rescue nil # load /tasks/*.rake
