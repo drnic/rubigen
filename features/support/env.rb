@@ -1,6 +1,6 @@
 gem 'cucumber'
 require 'cucumber'
-gem 'rspec'
+gem 'rspec', '~> 1.3'
 require 'spec'
 
 require File.dirname(__FILE__) + "/../../lib/rubigen"
