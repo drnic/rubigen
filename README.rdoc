@@ -104,7 +104,7 @@ only a few lines of code.
 These are the `newgem` files related to its Application Generator.
 
     bin/
-      bin/newgem        # Appliction Generator script; Usage: newgem gemname [options]
+      bin/newgem        # Application Generator script; Usage: newgem gemname [options]
     app_generators/
       app_generators/newgem/
         app_generators/newgem/newgem_generator.rb
