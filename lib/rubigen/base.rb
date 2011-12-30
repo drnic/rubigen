@@ -93,7 +93,7 @@ module RubiGen
 
     # Every generator that is dynamically looked up is tagged with a
     # Spec describing where it was found.
-    class_inheritable_accessor :spec
+    class_attribute :spec
 
     attr_reader :source_root, :destination_root, :args, :stdout
 
