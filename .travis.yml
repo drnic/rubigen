@@ -1,0 +1,3 @@
+before_install:
+  - gem install hoe activesupport i18n newgem rdoc cucumber
+  - rake gemspec
