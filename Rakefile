@@ -16,6 +16,7 @@ Hoe.spec 'rubigen' do
   extra_deps << ['activesupport','>= 2.3.5']
   # Needed when loading active_support/all
   extra_deps << ['i18n']
+  extra_dev_deps << ['rspec','~>1.3']
   extra_dev_deps << ['mocha','>= 0.9.8']
   extra_dev_deps << ['cucumber','>= 0.6.2']
   extra_dev_deps << ['shoulda','>= 2.10.3']
