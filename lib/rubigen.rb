@@ -4,7 +4,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'active_support/all' 
 
 module RubiGen
-  VERSION = '1.5.6'
+  VERSION = '1.5.7'
 end
 
 require 'rubigen/base'
