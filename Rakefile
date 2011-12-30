@@ -12,6 +12,7 @@ Hoe.plugin :git
 Hoe.spec 'rubigen' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Jeremy Kemper', 'jeremy@bitsweat.net'
+  developer 'Ben Klang', 'bklang@mojolingo.com'
   extra_deps << ['activesupport','>= 2.3.5']
   # Needed when loading active_support/all
   extra_deps << ['i18n']
