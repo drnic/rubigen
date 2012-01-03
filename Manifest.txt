@@ -1,6 +1,7 @@
 .autotest
 History.txt
 License.txt
+Gemfile
 Manifest.txt
 README.rdoc
 Rakefile
