@@ -3,10 +3,6 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 require 'active_support/all' 
 
-module RubiGen
-  VERSION = '1.5.8'
-end
-
 require 'rubigen/base'
 require 'rubigen/lookup'
 require 'rubigen/commands'
