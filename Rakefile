@@ -1,30 +1,25 @@
-require 'rubygems'
-require 'hoe'
+#!/usr/bin/env rake
+require "bundler/gem_tasks"
+
 require './lib/rubigen'
 
-Hoe.plugin :newgem
-Hoe.plugin :website
-Hoe.plugin :cucumberfeatures
-Hoe.plugin :git
-
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-Hoe.spec 'rubigen' do
-  developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
-  developer 'Jeremy Kemper', 'jeremy@bitsweat.net'
-  developer 'Ben Klang', 'bklang@mojolingo.com'
-  extra_deps << ['activesupport','>= 2.3.5', "< 3.2.0"]
-  # Needed when loading active_support/all
-  extra_deps << ['i18n']
-  extra_dev_deps << ['rspec','~>1.3']
-  extra_dev_deps << ['mocha','>= 0.9.8']
-  extra_dev_deps << ['cucumber','>= 0.6.2']
-  extra_dev_deps << ['shoulda','>= 2.10.3']
-  extra_dev_deps << ['hoe']
-  extra_dev_deps << ['hoe-git']
-  extra_dev_deps << ['newgem']
+namespace :cucumber do
+  require 'cucumber/rake/task'
+  Cucumber::Rake::Task.new(:wip, 'Run features that are being worked on') do |t|
+    t.cucumber_opts = "--tags @wip"
+  end
+  Cucumber::Rake::Task.new(:ok, 'Run features that should be working') do |t|
+    t.cucumber_opts = "--tags ~@wip"
+  end
+  task :all => [:ok, :wip]
 end
 
-require 'newgem/tasks' rescue nil # load /tasks/*.rake
+desc "Go to TravisCI status page"
+task :travis do
+  require "launchy"
+  Launchy.open("http://travis-ci.org/#!/drnic/rubigen")
+end
+desc 'Alias for cucumber:ok'
+task :cucumber => 'cucumber:ok'
 
-task :default => :features
+task :default => ["test", "cucumber"]
