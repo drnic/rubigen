@@ -1,3 +1,7 @@
+== 1.5.8 2012-03-23
+* Restrict activesupport < 3.2
+* Change from hoe to bundler build tools
+
 == 1.5.6 2011-02-01
 * Allow activesupport 3.0.0+
 
