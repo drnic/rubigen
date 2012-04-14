@@ -289,6 +289,11 @@ module RubiGen
         system("git add -v #{relative_destination}") if options[:git]
       end
 
+      def run(command, relative_path = '')
+        logger.run command
+        system("cd #{destination_path(relative_path)} && #{command}")
+      end
+
       # Checks if the source and the destination file are identical. If
       # passed a block then the source file is a template that needs to first
       # be evaluated before being compared to the destination.
