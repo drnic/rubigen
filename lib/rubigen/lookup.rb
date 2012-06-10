@@ -281,8 +281,7 @@ module RubiGen
     private
       def generator_full_paths
         @generator_full_paths ||=
-          Gem::source_index.inject({}) do |latest, name_gem|
-            name, gem = name_gem
+          Gem::Specification.inject({}) do |latest, gem|
             hem = latest[gem.name]
             latest[gem.name] = gem if hem.nil? or gem.version > hem.version
             latest
