@@ -362,7 +362,11 @@ module RubiGen
           # Evaluate any assignments in a temporary, throwaway binding.
           vars = template_options[:assigns] || {}
           b = binding
-          vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+          if b.respond_to?(:local_variable_set)
+              vars.each { |k,v| b.local_variable_set(k.to_sym, v) }
+          else
+              vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+          end
 
           # Render the source file with the temporary binding.
           rendered = ERB.new(file.read, nil, '-').result(b)
@@ -656,7 +660,11 @@ end_message
         # Evaluate any assignments in a temporary, throwaway binding.
         vars = template_options[:assigns] || {}
         b = binding
-        vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+        if b.respond_to?(:local_variable_set)
+            vars.each { |k,v| b.local_variable_set(k.to_sym, v) }
+        else
+            vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+        end
         snippet = ERB.new(file.read, nil, '-').result(b).split("\n")
         
         if idx = find_content_match(content, snippet)
