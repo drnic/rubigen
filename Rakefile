@@ -31,3 +31,5 @@ desc 'Alias for cucumber:ok'
 task :cucumber => 'cucumber:ok'
 
 task :default => ["test", "cucumber"]
+
+task :gem => ["build"]
