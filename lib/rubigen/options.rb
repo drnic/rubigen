@@ -4,6 +4,11 @@ module RubiGen
   module Options
     def self.included(base)
       base.extend(ClassMethods)
+      base.class_eval do
+        class_attribute :__mandatory_options
+        class_attribute :__default_options
+      end
+
       class << base
         if respond_to?(:inherited)
           alias_method :inherited_without_options, :inherited
@@ -20,17 +25,17 @@ module RubiGen
 
       def mandatory_options(options = nil)
         if options
-          write_inheritable_attribute(:mandatory_options, options)
+          self.__mandatory_options = options
         else
-          read_inheritable_attribute(:mandatory_options) or write_inheritable_attribute(:mandatory_options, {})
+          __mandatory_options or self.__mandatory_options = {}
         end
       end
 
       def default_options(options = nil)
         if options
-          write_inheritable_attribute(:default_options, options)
+          self.__default_options = options
         else
-          read_inheritable_attribute(:default_options) or write_inheritable_attribute(:default_options, {})
+          __default_options or self.__default_options = {}
         end
       end
 

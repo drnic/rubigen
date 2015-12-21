@@ -59,8 +59,27 @@ module RubiGen
       # Does nothing for all commands except Create.
       def write_manifest
       end
-      
+
       protected
+        # Given the content of a file and a snippet, finds the snippet within the
+        # file and returns its position as the line number in the file. Returns
+        # nil if no match was found.
+        #
+        # Both file and snippets are given as array of strings, each string being
+        # a line. The match ignores indentation changes.
+        def find_content_match(file, snippet)
+            snippet = snippet.map(&:strip)
+            file.each_with_index do |line, idx|
+              if line.strip == snippet.first
+                matched = snippet.each_with_index.all? do |snippet_line, offset|
+                  file[offset + idx].strip == snippet_line
+                end
+                return idx if matched
+              end
+            end
+            nil
+        end
+
         def current_migration_number
           Dir.glob("#{RAILS_ROOT}/#{@migration_directory}/[0-9]*_*.rb").inject(0) do |max, file_path|
             n = File.basename(file_path).split('_', 2).first.to_i
@@ -259,8 +278,9 @@ module RubiGen
         # if block given so templaters may render the source file.  If a
         # shebang is requested, replace the existing shebang or insert a
         # new one.
+        content = render_file(source, file_options, &block)
         File.open(destination, 'wb') do |dest|
-          dest.write render_file(source, file_options, &block)
+          dest.write content
         end
 
         # Optionally change permissions.
@@ -299,6 +319,30 @@ module RubiGen
         source == destination
       end
 
+      # Appends a text snippet in a file
+      #
+      # It does not modify the file if the snippet already exists. In destroy
+      # mode, comments the line out
+      #
+      # If the file needs some more content, you can generate it "fresh" using
+      # #template first, setting the collision option to :skip with e.g.
+      #
+      #   template 'foo', 'bar', :collision => :skip
+      def add_template_to_file(relative_source, relative_destination, template_options = {})
+        template(relative_source, relative_destination, template_options.merge(:collision => :force)) do |new_content|
+          destination = destination_path(relative_destination)
+          if File.file?(destination)
+            content = File.readlines(destination)
+            if find_content_match(content, new_content.split("\n"))
+              content.join
+            else
+              content.join + "\n" + new_content
+            end
+          else new_content
+          end
+        end
+      end
+
       # Generate a file using an ERuby template.
       # Looks up and evaluates a template by name and writes the result.
       #
@@ -318,10 +362,18 @@ module RubiGen
           # Evaluate any assignments in a temporary, throwaway binding.
           vars = template_options[:assigns] || {}
           b = binding
-          vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+          if b.respond_to?(:local_variable_set)
+              vars.each { |k,v| b.local_variable_set(k.to_sym, v) }
+          else
+              vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+          end
 
           # Render the source file with the temporary binding.
-          ERB.new(file.read, nil, '-').result(b)
+          rendered = ERB.new(file.read, nil, '-').result(b)
+          if block_given?
+            yield(rendered)
+          else rendered
+          end
         end
       end
 
@@ -597,6 +649,30 @@ end_message
         look_for = "\n  map.resources #{resource_list}\n"
         logger.route "map.resources #{resource_list}"
         gsub_file 'config/routes.rb', /(#{look_for})/mi, ''
+      end
+
+      def add_template_to_file(relative_source, relative_destination, template_options = {})
+        destination = destination_path(relative_destination)
+        return if !File.file?(destination)
+
+        content = File.readlines(destination)
+
+        # Evaluate any assignments in a temporary, throwaway binding.
+        vars = template_options[:assigns] || {}
+        b = binding
+        if b.respond_to?(:local_variable_set)
+            vars.each { |k,v| b.local_variable_set(k.to_sym, v) }
+        else
+            vars.each { |k,v| eval "#{k} = vars[:#{k}] || vars['#{k}']", b }
+        end
+        snippet = ERB.new(file.read, nil, '-').result(b).split("\n")
+        
+        if idx = find_content_match(content, snippet)
+          logger.remove_snippet relative_destination
+          File.open(destination, 'wb') do |io|
+            io.write(content[0, idx] + content[(idx + snippet.size)..-1])
+          end
+        end
       end
     end
 

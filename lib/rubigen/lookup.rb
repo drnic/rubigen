@@ -49,6 +49,7 @@ module RubiGen
   module Lookup
     def self.included(base)
       base.extend(ClassMethods)
+      base.class_attribute :__sources
       # base.use_component_sources!  # TODO is this required since it has no scope/source context
     end
 
@@ -60,7 +61,7 @@ module RubiGen
     module ClassMethods
       # The list of sources where we look, in order, for generators.
       def sources
-        if read_inheritable_attribute(:sources).blank?
+        if __sources.blank?
           if superclass == RubiGen::Base
             superclass_sources = superclass.sources
             diff = superclass_sources.inject([]) do |mem, source|
@@ -69,11 +70,11 @@ module RubiGen
               mem << source unless found
               mem
             end
-            write_inheritable_attribute(:sources, diff)
+            self.__sources = diff
           end
-          active.use_component_sources! if read_inheritable_attribute(:sources).blank?
+          active.use_component_sources! if __sources.blank?
         end
-        read_inheritable_attribute(:sources)
+        __sources
       end
 
       # Add a source to the end of the list.
@@ -86,20 +87,20 @@ module RubiGen
       def prepend_sources(*args)
         sources = self.sources
         reset_sources
-        write_inheritable_array(:sources, args.flatten + sources)
+        self.__sources = args.flatten + sources
         invalidate_cache!
       end
 
       # Reset the source list.
       def reset_sources
-        write_inheritable_attribute(:sources, [])
+        self.__sources = []
         invalidate_cache!
       end
       
       # Use application generators (app, ?).
       def use_application_sources!(*filters)
         reset_sources
-        write_inheritable_attribute(:sources, application_sources(filters))
+        self.__sources = application_sources(filters)
       end
       
       def application_sources(filters = [])
@@ -132,7 +133,7 @@ module RubiGen
           new_sources << PathSource.new(:plugins, "#{::APP_ROOT}/vendor/plugins/*/**/generators")
         end
         new_sources << filtered_sources(filters)
-        write_inheritable_attribute(:sources, new_sources.flatten)
+        self.__sources = new_sources.flatten
       end
       
       def filtered_sources(filters)
